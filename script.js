@@ -1,10 +1,107 @@
-// Wait for DOM to be ready
-document.addEventListener('DOMContentLoaded', function() {
-    console.log('P5.js Project initialized');
-    initApp();
-});
+import gsap from "gsap";
+import SplitText from "gsap/SplitText";
 
-function initApp() {
-    // Your JavaScript code here
-    console.log('App is running!');
-}
+gsap.registerPlugin(SplitText);
+
+document.fonts.ready.then(() => {
+  function createSplitTexts(elements) {
+    const split = {};
+
+    elements.forEach(({ key, selector, type }) => {
+      const config = { type, mask: type };
+
+      if (type === "chars") config.charsClass = "char";
+      if (type === "lines") config.linesClass = "line";
+      split[key] = SplitText.create(selector, config);
+    });
+    return split;
+  }
+
+  const splitElements = [
+    { key: "logoChars", selector: ".preloader-logo h1", type: "chars" },
+    { key: "footerLine", selector: ".preloader-footer p", type: "lines" },
+    { key: "headerChars", selector: ".header h1 ", type: "chars" },
+    { key: "heroFooterH3", selector: ".hero-footer h3", type: "lines" },
+    { key: "heroFooterP", selector: ".hero-footer p ", type: "lines" },
+    { key: "btnLabels", selector: ".btn-label span", type: "lines" },
+  ];
+
+  const split = createSplitTexts(splitElements);
+  gsap.set(
+    [
+      split.footerLine.words,
+      split.headerChars.chars,
+      split.heroFooterH3.lines,
+      split.heroFooterP.lines,
+      split.btnLabels.lines,
+    ],
+    { y: "100%" },
+  );
+
+  gsap.set(".btn-icon", { clipPath: "circle(0% at 50% 50%)" });
+  gsap.set(".btn", { scale: 0 });
+
+  function animateProgress(duration = 4) {
+    const tl = gsap.timeline();
+    const counterSteps = 5;
+    let currentProgress = 0;
+
+    for (let i = 0; i < counterSteps; i++) {
+      const finalStep = i === counterSteps - 1;
+      const targetProgress = finalStep
+        ? 1
+        : Math.min(currentProgress + Math.random() * 0.3 + 0.1, 0.9);
+
+      currentProgress = targetProgress;
+
+      tl.to(".preloader-progress-bar", {
+        scaleX: targetProgress,
+        duration: duration / counterSteps,
+        ease: "power2.out",
+      });
+    }
+
+    return tl;
+  }
+
+  const t1 = gsap.timeline({ delay: 0.5 });
+
+  t1.to(split.logoChars.chars, {
+    x: "0%",
+    stagger: 0.05,
+    duration: 1,
+    ease: "power4.inOut",
+  })
+    .to(
+      split.footerLine.lines,
+      {
+        y: "0%",
+        stagger: 0.1,
+        duration: 1,
+        ease: "power4.inOut",
+      },
+      "0.25",
+    )
+    .add(animateProgress(), "<")
+    .set(".preloader-progress", { backgroundColor: "var(--base-300)" })
+    .to(
+      split.logoChars.chars,
+      {
+        x: "-100%",
+        stagger: 0.05,
+        duration: 1,
+        ease: "power4.inOut",
+      },
+      "-=0.5",
+    )
+    .to(
+      split.footerLine.lines,
+      {
+        y: "-100%",
+        stagger: 0.1,
+        duration: 1,
+        ease: "power4.inOut",
+      },
+      "<",
+    );
+});
