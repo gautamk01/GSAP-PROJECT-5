@@ -103,5 +103,71 @@ document.fonts.ready.then(() => {
         ease: "power4.inOut",
       },
       "<",
+    )
+    .to(
+      ".preloader-progress",
+      {
+        opacity: 0,
+        duration: 0.5,
+        ease: "power3.out",
+      },
+      "-=0.25",
+    )
+    .to(
+      ".preloader-mask",
+      {
+        scale: 5,
+        duration: 2.5,
+        ease: "power3.out",
+      },
+      "<",
+    )
+    .to(
+      ".hero-img",
+      {
+        scale: 1,
+        duration: 1.5,
+        ease: "power3.out",
+      },
+      "<",
+    )
+    .to(split.headerChars.chars, {
+      y: 0,
+      stagger: 0.05,
+      duration: 1,
+      ease: "power4.out",
+      delay: -2,
+    })
+    .to(
+      [split.heroFooterH3.lines, split.heroFooterP.lines],
+      {
+        y: 0,
+        stagger: 0.1,
+        duration: 1,
+        ease: "power4.out",
+      },
+      "-=1.5",
+    )
+    .to(
+      ".btn",
+      {
+        scale: 1,
+        duration: 1,
+        ease: "power4.out",
+        onStart: () => {
+          t1.to(".btn-icon", {
+            clipPath: "circle(100% at 50% 50%)",
+            duration: 1,
+            ease: "power2.out",
+            delay: -1.25,
+          }).to(split.btnLabels.lines, {
+            y: 0,
+            duration: 1,
+            ease: "power4.out",
+            delay: -1.25,
+          });
+        },
+      },
+      "<",
     );
 });
