@@ -91,3 +91,107 @@ img {
   width: 25%;
   opacity: 0.5;
 }
+
+.contact-btn {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+}
+
+.menu-btn {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.btn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  cursor: pointer;
+  padding: 0.25rem 0.25rem 0.25rem 1.5rem;
+  border-radius: 50px;
+  background-color: var(--base-300);
+  color: var(--base-100);
+  will-change: transform;
+}
+
+.btn-icon {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  background-color: var(--base-100);
+  color: var(--base-300);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  border-radius: 100%;
+}
+
+.btn-label span {
+  font-size: 0.9rem;
+  font-weight: 450;
+  line-height: 1;
+}
+
+.preloader-progress,
+.preloader-mask,
+.preloader-content {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100svh;
+  pointer-events: none;
+}
+
+.preloader-progress {
+  background-color: var(--base-200);
+  z-index: 1;
+  will-change: opacity;
+}
+
+.preloader-progress-bar {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%) scaleX(0);
+  width: 55%;
+  height: 100%;
+  background-color: var(--base-300);
+  transform-origin: left;
+  will-change: transform;
+}
+
+.preloader-logo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: var(--base-300);
+  width: 100%;
+  text-align: center;
+  mix-blend-mode: difference;
+  z-index: 2;
+}
+
+.preloader-logo h1 {
+  position: relative;
+  color: var(--base-300);
+  font-size: 3rem;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.preloader-mask {
+  background-color: var(--base-100);
+  mask:
+    linear-gradient(var(--base-300), var(--base-300)),
+    url("/mask.svg") center/50% no-repeat;
+  mask-composite: subtract;
+  will-change: transform;
+  z-index: 1;
+}
