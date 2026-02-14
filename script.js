@@ -250,3 +250,278 @@ document.fonts.ready.then(() => {
     },
   );
 });
+
+// ===== CAKE BOOKING FORM LOGIC =====
+document.addEventListener("DOMContentLoaded", () => {
+  const modal = document.getElementById("booking-modal");
+  const card = document.getElementById("booking-card");
+  const backdrop = document.getElementById("booking-backdrop");
+  const openBtn = document.getElementById("open-booking-btn");
+  const closeBtn = document.getElementById("close-booking-btn");
+  const nextBtn = document.getElementById("form-next");
+  const prevBtn = document.getElementById("form-prev");
+  const progress = document.getElementById("form-progress");
+  const stepLabel = document.getElementById("step-label");
+  const form = document.getElementById("cake-form");
+  const formNav = document.getElementById("form-nav");
+  const successEl = document.getElementById("form-success");
+  const addressField = document.getElementById("address-field");
+
+  if (!modal || !openBtn) return;
+
+  let currentStep = 1;
+  const totalSteps = 3;
+
+  function openModal() {
+    modal.classList.remove("pointer-events-none", "opacity-0");
+    modal.classList.add("pointer-events-auto", "opacity-100");
+    document.body.style.overflow = "hidden";
+    gsap.fromTo(
+      card,
+      { scale: 0.9, y: 40, opacity: 0 },
+      { scale: 1, y: 0, opacity: 1, duration: 0.5, ease: "power3.out" },
+    );
+    animateFieldsIn(1);
+  }
+
+  function closeModal() {
+    gsap.to(card, {
+      scale: 0.9,
+      y: 30,
+      opacity: 0,
+      duration: 0.3,
+      ease: "power2.in",
+      onComplete: () => {
+        modal.classList.add("pointer-events-none", "opacity-0");
+        modal.classList.remove("pointer-events-auto", "opacity-100");
+        document.body.style.overflow = "";
+        resetForm();
+      },
+    });
+  }
+
+  function resetForm() {
+    currentStep = 1;
+    form.reset();
+    successEl.classList.add("hidden");
+    formNav.classList.remove("hidden");
+    document.querySelectorAll(".form-step").forEach((s, i) => {
+      s.classList.toggle("hidden", i !== 0);
+    });
+    updateProgress();
+    addressField.style.display = "none";
+  }
+
+  function updateProgress() {
+    const pct = (currentStep / totalSteps) * 100;
+    progress.style.width = `${pct}%`;
+    stepLabel.textContent = `${currentStep} / ${totalSteps}`;
+    prevBtn.classList.toggle("invisible", currentStep === 1);
+    if (currentStep === totalSteps) {
+      nextBtn.innerHTML =
+        'Send Booking <span class="material-icons text-base">check</span>';
+    } else {
+      nextBtn.innerHTML =
+        'Next <span class="material-icons text-base">arrow_forward</span>';
+    }
+  }
+
+  function animateFieldsIn(step) {
+    const stepEl = document.querySelector(`.form-step[data-step="${step}"]`);
+    if (!stepEl) return;
+    const fields = stepEl.querySelectorAll(".form-field");
+    gsap.fromTo(
+      fields,
+      { y: 20, opacity: 0 },
+      {
+        y: 0,
+        opacity: 1,
+        duration: 0.4,
+        stagger: 0.08,
+        ease: "power2.out",
+        delay: 0.1,
+      },
+    );
+  }
+
+  function validateStep(step) {
+    const stepEl = document.querySelector(`.form-step[data-step="${step}"]`);
+    if (!stepEl) return true;
+    const inputs = stepEl.querySelectorAll("[required]");
+    let valid = true;
+    inputs.forEach((inp) => {
+      if (!inp.value || inp.value.trim() === "") {
+        valid = false;
+        gsap.fromTo(
+          inp,
+          { x: -6 },
+          {
+            x: 0,
+            duration: 0.4,
+            ease: "elastic.out(1, 0.3)",
+          },
+        );
+        inp.style.borderColor = "#ef4444";
+        inp.addEventListener(
+          "input",
+          () => {
+            inp.style.borderColor = "";
+          },
+          { once: true },
+        );
+      }
+    });
+    return valid;
+  }
+
+  function goToStep(newStep) {
+    if (newStep < 1 || newStep > totalSteps) return;
+    const oldStepEl = document.querySelector(
+      `.form-step[data-step="${currentStep}"]`,
+    );
+    const newStepEl = document.querySelector(
+      `.form-step[data-step="${newStep}"]`,
+    );
+    if (!oldStepEl || !newStepEl) return;
+
+    const direction = newStep > currentStep ? 1 : -1;
+
+    gsap.to(oldStepEl, {
+      x: direction * -40,
+      opacity: 0,
+      duration: 0.25,
+      ease: "power2.in",
+      onComplete: () => {
+        oldStepEl.classList.add("hidden");
+        newStepEl.classList.remove("hidden");
+        gsap.fromTo(
+          newStepEl,
+          { x: direction * 40, opacity: 0 },
+          { x: 0, opacity: 1, duration: 0.35, ease: "power2.out" },
+        );
+        currentStep = newStep;
+        updateProgress();
+        animateFieldsIn(newStep);
+      },
+    });
+  }
+
+  function submitForm() {
+    const data = new FormData(form);
+    const msg = [
+      `🎂 *New Cake Booking*`,
+      ``,
+      `📅 Date: ${data.get("date")}`,
+      `⏰ Time: ${data.get("time")}`,
+      `👤 Name: ${data.get("name")}`,
+      `📱 Phone: ${data.get("phone")}`,
+      ``,
+      `🍰 Flavour: ${data.get("flavour")}`,
+      `⚖️ Weight: ${data.get("weight")}`,
+      `🕯️ Candle: ${data.get("candle") || "None"}`,
+      `✍️ Message: ${data.get("message") || "None"}`,
+      `🥚 Eggless: ${data.get("eggless") ? "Yes" : "No"}`,
+      ``,
+      `🚗 Delivery: ${data.get("delivery") === "deliver" ? "Home Delivery" : "Self Pickup"}`,
+      data.get("delivery") === "deliver"
+        ? `📍 Address: ${data.get("address")}`
+        : "",
+      data.get("specs") ? `📝 Specs: ${data.get("specs")}` : "",
+    ]
+      .filter(Boolean)
+      .join("\n");
+
+    // Show success animation
+    const lastStep = document.querySelector(
+      `.form-step[data-step="${currentStep}"]`,
+    );
+    gsap.to(lastStep, {
+      opacity: 0,
+      y: -20,
+      duration: 0.3,
+      ease: "power2.in",
+      onComplete: () => {
+        lastStep.classList.add("hidden");
+        formNav.classList.add("hidden");
+        successEl.classList.remove("hidden");
+        gsap.fromTo(
+          successEl,
+          { scale: 0.8, opacity: 0 },
+          { scale: 1, opacity: 1, duration: 0.5, ease: "back.out(1.7)" },
+        );
+        gsap.fromTo(
+          successEl.querySelector(".material-icons"),
+          { rotate: -180, scale: 0 },
+          {
+            rotate: 0,
+            scale: 1,
+            duration: 0.6,
+            ease: "back.out(2)",
+            delay: 0.15,
+          },
+        );
+        progress.style.width = "100%";
+        stepLabel.textContent = "✓";
+      },
+    });
+
+    // Open WhatsApp with the booking details
+    const waUrl = `https://wa.me/?text=${encodeURIComponent(msg)}`;
+    setTimeout(() => window.open(waUrl, "_blank"), 1500);
+
+    // Log to console for now
+    console.log("Cake Booking:", Object.fromEntries(data));
+  }
+
+  // Event listeners
+  openBtn.addEventListener("click", openModal);
+  closeBtn.addEventListener("click", closeModal);
+  backdrop.addEventListener("click", closeModal);
+
+  nextBtn.addEventListener("click", () => {
+    if (!validateStep(currentStep)) return;
+    if (currentStep < totalSteps) {
+      goToStep(currentStep + 1);
+    } else {
+      submitForm();
+    }
+  });
+
+  prevBtn.addEventListener("click", () => {
+    if (currentStep > 1) goToStep(currentStep - 1);
+  });
+
+  // Toggle address field based on delivery radio
+  document.querySelectorAll('input[name="delivery"]').forEach((radio) => {
+    radio.addEventListener("change", (e) => {
+      const show = e.target.value === "deliver";
+      if (show) {
+        addressField.style.display = "block";
+        gsap.fromTo(
+          addressField,
+          { height: 0, opacity: 0 },
+          { height: "auto", opacity: 1, duration: 0.35, ease: "power2.out" },
+        );
+        addressField.querySelector("textarea").required = true;
+      } else {
+        gsap.to(addressField, {
+          height: 0,
+          opacity: 0,
+          duration: 0.25,
+          ease: "power2.in",
+          onComplete: () => {
+            addressField.style.display = "none";
+            addressField.querySelector("textarea").required = false;
+          },
+        });
+      }
+    });
+  });
+
+  // Close on Escape key
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && !modal.classList.contains("opacity-0")) {
+      closeModal();
+    }
+  });
+});
