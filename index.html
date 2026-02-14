@@ -91,43 +91,68 @@
       class="w-full px-4 md:px-8 py-4 md:py-6 flex justify-between items-center bg-transparent z-50 relative"
     >
       <div
-        class="hidden md:flex gap-8 text-sm uppercase tracking-widest font-medium"
+        class="hidden md:flex gap-6 text-xs uppercase tracking-widest font-medium"
       >
-        <a class="hover:text-primary transition-colors" href="#">Shop</a>
-        <a class="hover:text-primary transition-colors" href="#">Learn</a>
+        <a
+          class="hover:text-primary transition-colors cursor-pointer"
+          href="#about"
+          >About</a
+        >
+        <a
+          class="hover:text-primary transition-colors cursor-pointer"
+          href="#menu"
+          >Menu</a
+        >
+        <a
+          class="hover:text-primary transition-colors cursor-pointer"
+          href="#gallery"
+          >Gallery</a
+        >
       </div>
       <div>
-        <h1
+        <a
+          href="#"
           class="font-display text-lg md:text-3xl tracking-[0.1em] font-bold text-black dark:text-white uppercase whitespace-nowrap"
+          >Heavenly Bakes</a
         >
-          Heavenly Bakes
-        </h1>
       </div>
       <div
-        class="flex items-center gap-4 md:gap-8 text-sm uppercase tracking-widest font-medium"
+        class="flex items-center gap-4 md:gap-6 text-xs uppercase tracking-widest font-medium"
       >
-        <a class="hidden md:block hover:text-primary transition-colors" href="#"
-          >Account</a
+        <a
+          class="hidden md:block hover:text-primary transition-colors cursor-pointer"
+          href="#custom"
+          >Custom</a
         >
-        <div class="relative group cursor-pointer hidden md:block">
-          <span
-            class="hover:text-primary transition-colors flex items-center gap-1"
-          >
-            Cart
-            <span
-              class="inline-flex items-center justify-center w-6 h-6 rounded-full border border-current text-[10px] ml-1 group-hover:bg-primary group-hover:text-white group-hover:border-primary transition-all"
-              >0</span
-            >
-          </span>
-        </div>
+        <a
+          class="hidden md:block hover:text-primary transition-colors cursor-pointer"
+          href="#contact"
+          >Contact</a
+        >
+        <a
+          class="hidden md:flex items-center gap-1 hover:text-primary transition-colors cursor-pointer"
+          href="https://instagram.com"
+          target="_blank"
+          rel="noopener"
+        >
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+            <path
+              d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"
+            />
+          </svg>
+        </a>
         <button
           aria-label="Toggle Dark Mode"
-          class="p-2 rounded-full hover:bg-black/5 dark:hover:bg-white/10 transition-colors"
+          class="p-2 rounded-full hover:bg-black/5 dark:hover:bg-white/10 transition-colors cursor-pointer"
           onclick="document.documentElement.classList.toggle('dark')"
         >
           <span class="material-icons text-xl align-middle">brightness_4</span>
         </button>
-        <button id="hamburger-btn" class="md:hidden p-2" aria-label="Open Menu">
+        <button
+          id="hamburger-btn"
+          class="md:hidden p-2 cursor-pointer"
+          aria-label="Open Menu"
+        >
           <span class="material-icons">menu</span>
         </button>
       </div>
@@ -146,36 +171,61 @@
         class="absolute top-0 right-0 w-72 h-full bg-white dark:bg-zinc-900 shadow-2xl p-8 flex flex-col gap-6 translate-x-full transition-transform duration-300"
         id="mobile-nav-panel"
       >
-        <button id="close-nav-btn" class="self-end p-2" aria-label="Close Menu">
+        <button
+          id="close-nav-btn"
+          class="self-end p-2 cursor-pointer"
+          aria-label="Close Menu"
+        >
           <span class="material-icons text-2xl">close</span>
         </button>
         <a
           class="text-lg uppercase tracking-widest font-medium hover:text-primary transition-colors"
-          href="#"
-          >Shop</a
+          href="#about"
+          onclick="closeNavMobile()"
+          >About</a
         >
         <a
           class="text-lg uppercase tracking-widest font-medium hover:text-primary transition-colors"
-          href="#"
-          >Learn</a
+          href="#menu"
+          onclick="closeNavMobile()"
+          >Menu</a
         >
         <a
           class="text-lg uppercase tracking-widest font-medium hover:text-primary transition-colors"
-          href="#"
-          >Account</a
+          href="#gallery"
+          onclick="closeNavMobile()"
+          >Gallery</a
         >
-        <div
-          class="flex items-center gap-2 text-lg uppercase tracking-widest font-medium cursor-pointer"
+        <a
+          class="text-lg uppercase tracking-widest font-medium hover:text-primary transition-colors"
+          href="#custom"
+          onclick="closeNavMobile()"
+          >Custom Orders</a
         >
-          Cart
-          <span
-            class="inline-flex items-center justify-center w-6 h-6 rounded-full border border-current text-[10px]"
-            >0</span
-          >
-        </div>
+        <a
+          class="text-lg uppercase tracking-widest font-medium hover:text-primary transition-colors"
+          href="#contact"
+          onclick="closeNavMobile()"
+          >Contact</a
+        >
+        <hr class="border-black/10 dark:border-white/10" />
+        <a
+          class="flex items-center gap-3 text-lg font-medium hover:text-primary transition-colors"
+          href="https://instagram.com"
+          target="_blank"
+          rel="noopener"
+        >
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+            <path
+              d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"
+            />
+          </svg>
+          Instagram
+        </a>
       </div>
     </div>
 
+    <!-- ===== SECTION 1: HERO ===== -->
     <main
       class="flex-grow relative w-full max-w-7xl mx-auto px-4 py-8 md:px-6 md:py-20 flex flex-col md:flex-row items-center justify-center min-h-[85vh] md:min-h-auto"
     >
@@ -183,7 +233,7 @@
         class="absolute bottom-10 left-[-5%] md:left-10 w-24 md:w-64 opacity-90 scatter-img z-0 rotate-[-15deg] hidden md:block"
       >
         <img
-          alt="Artisanal toast with paprika and toppings"
+          alt="Artisanal toast"
           class="w-full h-auto drop-shadow-xl rounded-lg object-cover"
           src="https://lh3.googleusercontent.com/aida-public/AB6AXuCdhfkP-0pqHDlurIL9IVBDkqfowWIPTcVrI-J775OJ5iAM-q2oX9-OvVnTRu3TAkjryGxNt3nM0Da62NYIDN8SFR7JyohAmXFZebI4J0NeO440MgrYXBcSafeqP4zF-IjS59JNrjKTxqjAf2xIUtpCuJcENwdjvPfY-Vt-fJ6DtWFIf_hCwWmwcN0r6PgnVvsXs2xO_jYGodXDyRt9De5l1TS6tS9FYLxxL8I--beddBoh4KCwXXON3OsAaw3tIeTOqiTKVdW1TC-c"
         />
@@ -192,7 +242,7 @@
         class="absolute bottom-[-5%] left-1/2 transform -translate-x-1/2 w-32 md:w-72 scatter-img z-10 rotate-[5deg] hidden md:block"
       >
         <img
-          alt="Toast with fresh strawberries and cream"
+          alt="Strawberry toast"
           class="w-full h-auto drop-shadow-2xl rounded-lg object-cover"
           src="https://lh3.googleusercontent.com/aida-public/AB6AXuC6MUFluuuveRpAJ6hQNSxYxs8Cikfr9on3hOb-9baFZ0udyXNlLqpk_rOkYpWu9cXFXWBT0xnneO0OturLXu4H2FMAx6ePUL8RBslGvxdZS5B61w-883rou-wJJB8y71Fod0LQtfvY4tV9T4MXGs8UBEFCoTCOXLqMejvCEUV0g-ZcakXTbnYPQ-ayRoVyF0wN7GYs-CE_AVKllq9ZGWnB0ZAnrPQYtf-QVYrVFDl4gf0shhlkrCf1OOuzQiRFQts7foi_wfxpIQAG"
         />
@@ -200,22 +250,11 @@
       <div
         class="absolute top-[5%] right-0 md:top-1/2 md:right-[2%] md:-translate-y-1/2 w-[160px] md:w-[500px] scatter-img z-0"
       >
-        <div class="relative">
-          <img
-            alt="Top down view of french toast on a plate"
-            class="w-full h-auto rounded-full shadow-2xl object-cover aspect-square opacity-30 md:opacity-100"
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDuQAncG66OkY5CWIB9OisoRYoSnbImLezOH8ai7-ijYdlAxTmXLpKU28oC3Q2YjVmUUGSkai4-kMNZgcdTQPRdSI_uciS_xKfgPpMQ8-LtuEXTCmPz7lDviCbpJHjApf6qHTo6PnzCr5_GdbRM8AeqK-kQ-_QNwY9tTdpQmusbT9maU9356oKZYbRTlLztB_gREFQsT9fuer8VkEB6UY6jjD7c-As67ru-fWX8sqRvMVW8s5nYFgWRnP2cwf559ohS3kua1qY5MsMT"
-          />
-        </div>
-      </div>
-      <div class="absolute top-20 right-20 hidden md:block opacity-60">
-        <span class="material-icons text-primary/40 text-4xl rotate-45"
-          >grain</span
-        >
-        <span
-          class="material-icons text-primary/40 text-2xl rotate-12 absolute top-8 left-8"
-          >grain</span
-        >
+        <img
+          alt="French toast on plate"
+          class="w-full h-auto rounded-full shadow-2xl object-cover aspect-square opacity-30 md:opacity-100"
+          src="https://lh3.googleusercontent.com/aida-public/AB6AXuDuQAncG66OkY5CWIB9OisoRYoSnbImLezOH8ai7-ijYdlAxTmXLpKU28oC3Q2YjVmUUGSkai4-kMNZgcdTQPRdSI_uciS_xKfgPpMQ8-LtuEXTCmPz7lDviCbpJHjApf6qHTo6PnzCr5_GdbRM8AeqK-kQ-_QNwY9tTdpQmusbT9maU9356oKZYbRTlLztB_gREFQsT9fuer8VkEB6UY6jjD7c-As67ru-fWX8sqRvMVW8s5nYFgWRnP2cwf559ohS3kua1qY5MsMT"
+        />
       </div>
       <div
         class="relative z-20 text-center md:text-left md:max-w-3xl mt-8 md:mt-0 md:ml-20"
@@ -237,31 +276,541 @@
         </p>
         <div class="flex justify-center md:justify-start">
           <a
-            class="btn-oval px-8 py-3 md:px-10 md:py-3 text-base md:text-lg font-display italic text-primary border-primary hover:bg-primary hover:text-white dark:border-primary dark:text-primary dark:hover:text-white inline-block"
-            href="#"
+            class="btn-oval px-8 py-3 md:px-10 md:py-3 text-base md:text-lg font-display italic text-primary border-primary hover:bg-primary hover:text-white inline-block cursor-pointer"
+            href="#menu"
           >
-            Shop
+            Explore Our Menu
           </a>
         </div>
       </div>
     </main>
 
-    <footer
-      class="w-full py-4 md:py-6 px-4 md:px-8 flex flex-col md:flex-row justify-center md:justify-between items-center md:items-end gap-3 md:gap-0 text-xs uppercase tracking-widest text-text-light/60 dark:text-text-dark/60 z-20"
+    <!-- ===== SECTION 2: OUR STORY ===== -->
+    <section
+      id="about"
+      class="w-full py-20 md:py-32 bg-white dark:bg-zinc-900/50"
     >
-      <div class="order-2 md:order-1">
-        <p>© 2023 Heavenly Bakes by Divya</p>
+      <div
+        class="max-w-6xl mx-auto px-6 md:px-8 grid md:grid-cols-2 gap-12 md:gap-20 items-center"
+      >
+        <div class="reveal-section order-2 md:order-1">
+          <p
+            class="text-xs uppercase tracking-[0.3em] text-primary font-medium mb-4"
+          >
+            Our Story
+          </p>
+          <h3
+            class="font-display text-3xl md:text-5xl leading-tight text-black dark:text-white mb-6"
+          >
+            From a small kitchen, <br /><span
+              class="italic font-light text-primary"
+              >with big love</span
+            >
+          </h3>
+          <p
+            class="font-body text-text-light/70 dark:text-text-dark/70 leading-relaxed mb-6"
+          >
+            What started as a passion for baking in a home kitchen has grown
+            into something truly special. Every loaf of bread, every layer of
+            cake, every cookie that comes out of our oven carries the warmth of
+            a home and the precision of a craft honed over years.
+          </p>
+          <p
+            class="font-body text-text-light/70 dark:text-text-dark/70 leading-relaxed"
+          >
+            Divya believes that the best baked goods come from the best
+            ingredients — organic flour, farm-fresh eggs, real butter, and most
+            importantly, patience. No shortcuts, no preservatives. Just honest,
+            heavenly baking delivered to your doorstep.
+          </p>
+        </div>
+        <div class="reveal-section order-1 md:order-2">
+          <div class="relative">
+            <img
+              src="/images/baker-story.png"
+              alt="Divya decorating a cake in her home kitchen"
+              class="w-full h-auto rounded-2xl shadow-xl object-cover"
+              loading="lazy"
+            />
+            <div
+              class="absolute -bottom-4 -left-4 md:-bottom-6 md:-left-6 bg-primary text-white px-5 py-3 rounded-xl font-display italic text-sm md:text-base shadow-lg"
+            >
+              Baking since 2019
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="order-1 md:order-2">
-        <button
-          class="bg-white dark:bg-zinc-800 text-black dark:text-white px-6 py-2 rounded-full shadow-lg flex items-center gap-2 text-xs font-bold hover:scale-105 transition-transform cursor-pointer"
+    </section>
+
+    <!-- ===== SECTION 3: MENU ===== -->
+    <section
+      id="menu"
+      class="w-full py-20 md:py-32 bg-background-light dark:bg-background-dark"
+    >
+      <div class="max-w-6xl mx-auto px-6 md:px-8">
+        <div class="text-center mb-16 reveal-section">
+          <p
+            class="text-xs uppercase tracking-[0.3em] text-primary font-medium mb-4"
+          >
+            What We Bake
+          </p>
+          <h3
+            class="font-display text-3xl md:text-5xl text-black dark:text-white"
+          >
+            Our Menu
+          </h3>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- Cakes -->
+          <div class="group reveal-section cursor-pointer">
+            <div class="overflow-hidden rounded-2xl mb-4">
+              <img
+                src="/images/chocolate-cake.png"
+                alt="Chocolate cake with ganache and berries"
+                class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-105"
+                loading="lazy"
+              />
+            </div>
+            <h4
+              class="font-display text-xl md:text-2xl text-black dark:text-white mb-1"
+            >
+              Signature Cakes
+            </h4>
+            <p
+              class="font-body text-sm text-text-light/60 dark:text-text-dark/60 mb-3"
+            >
+              Chocolate, Red Velvet, Butterscotch & more
+            </p>
+            <p class="text-primary font-medium text-sm">DM for pricing →</p>
+          </div>
+          <!-- Cookies -->
+          <div class="group reveal-section cursor-pointer">
+            <div class="overflow-hidden rounded-2xl mb-4">
+              <img
+                src="/images/assorted-cookies.png"
+                alt="Assorted homemade cookies"
+                class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-105"
+                loading="lazy"
+              />
+            </div>
+            <h4
+              class="font-display text-xl md:text-2xl text-black dark:text-white mb-1"
+            >
+              Cookies & Macarons
+            </h4>
+            <p
+              class="font-body text-sm text-text-light/60 dark:text-text-dark/60 mb-3"
+            >
+              Chocolate chip, shortbread, French macarons
+            </p>
+            <p class="text-primary font-medium text-sm">DM for pricing →</p>
+          </div>
+          <!-- Bread -->
+          <div class="group reveal-section cursor-pointer">
+            <div class="overflow-hidden rounded-2xl mb-4">
+              <img
+                src="/images/artisan-bread.png"
+                alt="Artisan sourdough bread"
+                class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-105"
+                loading="lazy"
+              />
+            </div>
+            <h4
+              class="font-display text-xl md:text-2xl text-black dark:text-white mb-1"
+            >
+              Artisan Bread
+            </h4>
+            <p
+              class="font-body text-sm text-text-light/60 dark:text-text-dark/60 mb-3"
+            >
+              Sourdough, focaccia, garlic bread, baguettes
+            </p>
+            <p class="text-primary font-medium text-sm">DM for pricing →</p>
+          </div>
+          <!-- Pastries -->
+          <div class="group reveal-section cursor-pointer">
+            <div class="overflow-hidden rounded-2xl mb-4">
+              <img
+                src="/images/pastries.png"
+                alt="Assorted pastries"
+                class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-105"
+                loading="lazy"
+              />
+            </div>
+            <h4
+              class="font-display text-xl md:text-2xl text-black dark:text-white mb-1"
+            >
+              Pastries
+            </h4>
+            <p
+              class="font-body text-sm text-text-light/60 dark:text-text-dark/60 mb-3"
+            >
+              Croissants, danish, eclairs, cinnamon rolls
+            </p>
+            <p class="text-primary font-medium text-sm">DM for pricing →</p>
+          </div>
+          <!-- Celebration Cakes -->
+          <div
+            class="group reveal-section cursor-pointer sm:col-span-2 lg:col-span-2"
+          >
+            <div class="overflow-hidden rounded-2xl mb-4">
+              <img
+                src="/images/celebration-cake.png"
+                alt="Custom celebration cake"
+                class="w-full h-64 md:h-80 object-cover transition-transform duration-500 group-hover:scale-105"
+                loading="lazy"
+              />
+            </div>
+            <h4
+              class="font-display text-xl md:text-2xl text-black dark:text-white mb-1"
+            >
+              Custom Celebration Cakes
+            </h4>
+            <p
+              class="font-body text-sm text-text-light/60 dark:text-text-dark/60 mb-3"
+            >
+              Weddings, birthdays, anniversaries — designed just for you
+            </p>
+            <a
+              href="#custom"
+              class="text-primary font-medium text-sm hover:underline cursor-pointer"
+              >Order Custom Cake →</a
+            >
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SECTION 4: GALLERY ===== -->
+    <section
+      id="gallery"
+      class="w-full py-20 md:py-32 bg-white dark:bg-zinc-900/50"
+    >
+      <div class="max-w-6xl mx-auto px-6 md:px-8">
+        <div class="text-center mb-16 reveal-section">
+          <p
+            class="text-xs uppercase tracking-[0.3em] text-primary font-medium mb-4"
+          >
+            Fresh From The Oven
+          </p>
+          <h3
+            class="font-display text-3xl md:text-5xl text-black dark:text-white"
+          >
+            Gallery
+          </h3>
+        </div>
+        <div class="columns-2 md:columns-3 gap-4 space-y-4">
+          <div class="reveal-section break-inside-avoid">
+            <img
+              src="/images/chocolate-cake.png"
+              alt="Chocolate layer cake"
+              class="w-full rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300"
+              loading="lazy"
+            />
+          </div>
+          <div class="reveal-section break-inside-avoid">
+            <img
+              src="/images/gallery-cupcakes.png"
+              alt="Pastel cupcakes with flowers"
+              class="w-full rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300"
+              loading="lazy"
+            />
+          </div>
+          <div class="reveal-section break-inside-avoid">
+            <img
+              src="/images/artisan-bread.png"
+              alt="Sourdough bread"
+              class="w-full rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300"
+              loading="lazy"
+            />
+          </div>
+          <div class="reveal-section break-inside-avoid">
+            <img
+              src="/images/gallery-cinnamon-rolls.png"
+              alt="Cinnamon rolls in skillet"
+              class="w-full rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300"
+              loading="lazy"
+            />
+          </div>
+          <div class="reveal-section break-inside-avoid">
+            <img
+              src="/images/celebration-cake.png"
+              alt="Wedding celebration cake"
+              class="w-full rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300"
+              loading="lazy"
+            />
+          </div>
+          <div class="reveal-section break-inside-avoid">
+            <img
+              src="/images/gallery-macarons.png"
+              alt="French macarons"
+              class="w-full rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300"
+              loading="lazy"
+            />
+          </div>
+          <div class="reveal-section break-inside-avoid">
+            <img
+              src="/images/pastries.png"
+              alt="Pastries platter"
+              class="w-full rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300"
+              loading="lazy"
+            />
+          </div>
+          <div class="reveal-section break-inside-avoid">
+            <img
+              src="/images/assorted-cookies.png"
+              alt="Cookie board"
+              class="w-full rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300"
+              loading="lazy"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SECTION 5: TESTIMONIALS ===== -->
+    <section
+      class="w-full py-20 md:py-32 bg-background-light dark:bg-background-dark"
+    >
+      <div class="max-w-6xl mx-auto px-6 md:px-8">
+        <div class="text-center mb-16 reveal-section">
+          <p
+            class="text-xs uppercase tracking-[0.3em] text-primary font-medium mb-4"
+          >
+            Happy Customers
+          </p>
+          <h3
+            class="font-display text-3xl md:text-5xl text-black dark:text-white"
+          >
+            What They Say
+          </h3>
+        </div>
+        <div class="grid md:grid-cols-3 gap-8">
+          <div
+            class="reveal-section bg-white dark:bg-zinc-800 rounded-2xl p-8 shadow-sm hover:shadow-md transition-shadow"
+          >
+            <div class="flex gap-1 text-primary mb-4">★★★★★</div>
+            <p
+              class="font-body text-text-light/70 dark:text-text-dark/70 leading-relaxed mb-6 italic"
+            >
+              "The chocolate cake was absolutely divine! You can taste the
+              quality in every bite. Divya puts so much love into her baking —
+              it's like getting a warm hug."
+            </p>
+            <div>
+              <p class="font-medium text-black dark:text-white">Priya Sharma</p>
+              <p class="text-xs text-text-light/50 dark:text-text-dark/50">
+                Ordered: Chocolate Truffle Cake
+              </p>
+            </div>
+          </div>
+          <div
+            class="reveal-section bg-white dark:bg-zinc-800 rounded-2xl p-8 shadow-sm hover:shadow-md transition-shadow"
+          >
+            <div class="flex gap-1 text-primary mb-4">★★★★★</div>
+            <p
+              class="font-body text-text-light/70 dark:text-text-dark/70 leading-relaxed mb-6 italic"
+            >
+              "We ordered a custom 3-tier cake for our anniversary and it was
+              perfect! Beautiful design, incredible taste. Everyone at the party
+              was asking for the bakery name."
+            </p>
+            <div>
+              <p class="font-medium text-black dark:text-white">
+                Rahul & Meena
+              </p>
+              <p class="text-xs text-text-light/50 dark:text-text-dark/50">
+                Ordered: Custom Anniversary Cake
+              </p>
+            </div>
+          </div>
+          <div
+            class="reveal-section bg-white dark:bg-zinc-800 rounded-2xl p-8 shadow-sm hover:shadow-md transition-shadow"
+          >
+            <div class="flex gap-1 text-primary mb-4">★★★★★</div>
+            <p
+              class="font-body text-text-light/70 dark:text-text-dark/70 leading-relaxed mb-6 italic"
+            >
+              "The sourdough bread is unreal. Crispy on the outside, soft
+              inside, and that aroma! I'm now a regular — ordering every weekend
+              without fail."
+            </p>
+            <div>
+              <p class="font-medium text-black dark:text-white">Ankit Verma</p>
+              <p class="text-xs text-text-light/50 dark:text-text-dark/50">
+                Ordered: Artisan Sourdough Bread
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SECTION 6: CUSTOM ORDERS ===== -->
+    <section
+      id="custom"
+      class="w-full py-20 md:py-32 bg-black text-white relative overflow-hidden"
+    >
+      <div class="absolute inset-0 opacity-20">
+        <img
+          src="/images/celebration-cake.png"
+          alt=""
+          class="w-full h-full object-cover"
+        />
+      </div>
+      <div class="relative z-10 max-w-4xl mx-auto px-6 md:px-8 text-center">
+        <div class="reveal-section">
+          <p
+            class="text-xs uppercase tracking-[0.3em] text-primary font-medium mb-4"
+          >
+            Special Occasions
+          </p>
+          <h3 class="font-display text-4xl md:text-6xl lg:text-7xl mb-6">
+            Dream it. <br /><span class="italic font-light text-primary"
+              >We'll bake it.</span
+            >
+          </h3>
+          <p
+            class="font-body text-white/70 max-w-xl mx-auto mb-12 leading-relaxed text-lg"
+          >
+            From birthday cakes to wedding centerpieces, we create custom
+            celebration cakes that are as unique as your occasion.
+          </p>
+        </div>
+        <div class="grid sm:grid-cols-3 gap-8 mb-12">
+          <div class="reveal-section">
+            <div
+              class="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center mx-auto mb-4"
+            >
+              <span class="material-icons text-primary">chat</span>
+            </div>
+            <h4 class="font-display text-lg mb-2">1. Message Us</h4>
+            <p class="text-white/50 text-sm">
+              DM us on Instagram with your idea, theme, and date
+            </p>
+          </div>
+          <div class="reveal-section">
+            <div
+              class="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center mx-auto mb-4"
+            >
+              <span class="material-icons text-primary">palette</span>
+            </div>
+            <h4 class="font-display text-lg mb-2">2. We Design</h4>
+            <p class="text-white/50 text-sm">
+              We'll share a design mockup and finalize flavours together
+            </p>
+          </div>
+          <div class="reveal-section">
+            <div
+              class="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center mx-auto mb-4"
+            >
+              <span class="material-icons text-primary">local_shipping</span>
+            </div>
+            <h4 class="font-display text-lg mb-2">3. We Deliver</h4>
+            <p class="text-white/50 text-sm">
+              Personally delivered to your doorstep, fresh and perfect
+            </p>
+          </div>
+        </div>
+        <a
+          class="btn-oval px-10 py-4 text-lg font-display italic text-white border-primary bg-primary hover:bg-primary-dark inline-flex items-center gap-3 cursor-pointer"
+          href="https://instagram.com"
+          target="_blank"
+          rel="noopener"
         >
-          Menu <span class="material-icons text-sm">menu</span>
-        </button>
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+            <path
+              d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"
+            />
+          </svg>
+          Order on Instagram
+        </a>
       </div>
-      <div class="text-center md:text-right hidden md:block max-w-xs order-3">
-        <p>Space unfold in light and shadow,</p>
-        <p>where structure finds its quiet rhythm.</p>
+    </section>
+
+    <!-- ===== SECTION 7: CONTACT / FOOTER ===== -->
+    <footer id="contact" class="w-full py-16 md:py-24 bg-zinc-900 text-white">
+      <div class="max-w-6xl mx-auto px-6 md:px-8">
+        <div class="grid md:grid-cols-3 gap-12 mb-16">
+          <div class="reveal-section">
+            <h4 class="font-display text-2xl md:text-3xl mb-4">
+              Heavenly Bakes
+            </h4>
+            <p class="text-white/50 leading-relaxed text-sm">
+              Handcrafted baked goods made with love, organic ingredients, and
+              zero preservatives. From our kitchen to your table.
+            </p>
+          </div>
+          <div class="reveal-section">
+            <h5
+              class="text-xs uppercase tracking-[0.3em] text-primary font-medium mb-4"
+            >
+              Quick Links
+            </h5>
+            <div class="flex flex-col gap-3">
+              <a
+                href="#about"
+                class="text-white/60 hover:text-primary transition-colors text-sm cursor-pointer"
+                >Our Story</a
+              >
+              <a
+                href="#menu"
+                class="text-white/60 hover:text-primary transition-colors text-sm cursor-pointer"
+                >Menu</a
+              >
+              <a
+                href="#gallery"
+                class="text-white/60 hover:text-primary transition-colors text-sm cursor-pointer"
+                >Gallery</a
+              >
+              <a
+                href="#custom"
+                class="text-white/60 hover:text-primary transition-colors text-sm cursor-pointer"
+                >Custom Orders</a
+              >
+            </div>
+          </div>
+          <div class="reveal-section">
+            <h5
+              class="text-xs uppercase tracking-[0.3em] text-primary font-medium mb-4"
+            >
+              Get In Touch
+            </h5>
+            <div class="flex flex-col gap-3 text-sm">
+              <a
+                href="https://instagram.com"
+                target="_blank"
+                rel="noopener"
+                class="text-white/60 hover:text-primary transition-colors flex items-center gap-2 cursor-pointer"
+              >
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                  <path
+                    d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"
+                  />
+                </svg>
+                @heavenlybakes
+              </a>
+              <p class="text-white/60 flex items-center gap-2">
+                <span class="material-icons text-base">schedule</span>
+                Orders: Mon – Sat, 9 AM – 7 PM
+              </p>
+              <p class="text-white/60 flex items-center gap-2">
+                <span class="material-icons text-base">local_shipping</span>
+                Personal delivery available
+              </p>
+            </div>
+          </div>
+        </div>
+        <div
+          class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4"
+        >
+          <p class="text-white/30 text-xs">
+            © 2025 Heavenly Bakes by Divya. All rights reserved.
+          </p>
+          <p class="text-white/30 text-xs italic font-display">
+            Made with flour, butter & love
+          </p>
+        </div>
       </div>
     </footer>
 
@@ -269,42 +818,52 @@
       type="module"
       src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
     ></script>
-
     <script
       nomodule
       src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
     ></script>
-
     <script type="module" src="/script.js"></script>
 
-    <!-- Mobile Nav Toggle (inline to avoid module delay) -->
     <script>
+      function closeNavMobile() {
+        const mobileNav = document.getElementById("mobile-nav");
+        const panel = document.getElementById("mobile-nav-panel");
+        if (mobileNav) {
+          mobileNav.classList.add("pointer-events-none", "opacity-0");
+          mobileNav.classList.remove("pointer-events-auto", "opacity-100");
+        }
+        if (panel) {
+          panel.classList.add("translate-x-full");
+          panel.classList.remove("translate-x-0");
+        }
+        document.body.style.overflow = "";
+      }
       document.addEventListener("DOMContentLoaded", () => {
         const hamburger = document.getElementById("hamburger-btn");
-        const mobileNav = document.getElementById("mobile-nav");
         const closeBtn = document.getElementById("close-nav-btn");
         const backdrop = document.getElementById("mobile-nav-backdrop");
-        const panel = document.getElementById("mobile-nav-panel");
-
         function openNav() {
+          const mobileNav = document.getElementById("mobile-nav");
+          const panel = document.getElementById("mobile-nav-panel");
           mobileNav.classList.remove("pointer-events-none", "opacity-0");
           mobileNav.classList.add("pointer-events-auto", "opacity-100");
           panel.classList.remove("translate-x-full");
           panel.classList.add("translate-x-0");
           document.body.style.overflow = "hidden";
         }
-
-        function closeNav() {
-          mobileNav.classList.add("pointer-events-none", "opacity-0");
-          mobileNav.classList.remove("pointer-events-auto", "opacity-100");
-          panel.classList.add("translate-x-full");
-          panel.classList.remove("translate-x-0");
-          document.body.style.overflow = "";
-        }
-
         if (hamburger) hamburger.addEventListener("click", openNav);
-        if (closeBtn) closeBtn.addEventListener("click", closeNav);
-        if (backdrop) backdrop.addEventListener("click", closeNav);
+        if (closeBtn) closeBtn.addEventListener("click", closeNavMobile);
+        if (backdrop) backdrop.addEventListener("click", closeNavMobile);
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach((a) => {
+          a.addEventListener("click", (e) => {
+            const target = document.querySelector(a.getAttribute("href"));
+            if (target) {
+              e.preventDefault();
+              target.scrollIntoView({ behavior: "smooth" });
+            }
+          });
+        });
       });
     </script>
   </body>

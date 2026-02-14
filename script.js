@@ -1,7 +1,8 @@
 import gsap from "gsap";
 import SplitText from "gsap/SplitText";
+import ScrollTrigger from "gsap/ScrollTrigger";
 
-gsap.registerPlugin(SplitText);
+gsap.registerPlugin(SplitText, ScrollTrigger);
 
 document.fonts.ready.then(() => {
   function createSplitTexts(elements) {
@@ -31,7 +32,7 @@ document.fonts.ready.then(() => {
 
   // Hide page content during preloader (nav, main, footer)
   // NOTE: Do NOT include #mobile-nav here — it uses CSS class toggle
-  gsap.set("nav, main, footer", { autoAlpha: 0 });
+  gsap.set("nav, main, section, footer", { autoAlpha: 0 });
 
   function animateProgress(duration = 4) {
     const tl = gsap.timeline();
@@ -166,9 +167,9 @@ document.fonts.ready.then(() => {
       gsap.set(".scatter-img", { scale: 0, opacity: 0 });
       gsap.set(".btn-oval", { scale: 0, opacity: 0 });
 
-      // Show main + footer containers (content still hidden via individual animations)
+      // Show main + footer + sections containers (content still hidden via individual animations)
       t1.to(
-        "main, footer",
+        "main, section, footer",
         { autoAlpha: 1, duration: 0.4, ease: "power2.out" },
         isDesktop ? "-=1.5" : "-=0.2",
       );
@@ -225,6 +226,21 @@ document.fonts.ready.then(() => {
         },
         "-=0.8",
       );
+
+      // === SCROLL-TRIGGERED SECTION ANIMATIONS ===
+      gsap.utils.toArray(".reveal-section").forEach((el) => {
+        gsap.from(el, {
+          scrollTrigger: {
+            trigger: el,
+            start: "top 85%",
+            toggleActions: "play none none none",
+          },
+          y: 60,
+          opacity: 0,
+          duration: 1,
+          ease: "power3.out",
+        });
+      });
 
       // Cleanup: revert SplitText on context change
       return () => {
