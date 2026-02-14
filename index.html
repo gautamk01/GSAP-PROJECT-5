@@ -68,7 +68,9 @@
     </style>
   </head>
 
-  <body>
+  <body
+    class="overflow-x-hidden bg-background-light dark:bg-background-dark max-w-[100vw]"
+  >
     <div class="preloader-progress">
       <div class="preloader-progress-bar"></div>
       <div class="preloader-logo"><h1>Heavenly Bakes</h1></div>
@@ -86,7 +88,7 @@
 
     <!--Bakery Content -->
     <nav
-      class="w-full px-8 py-6 flex justify-between items-center bg-transparent z-50 relative"
+      class="w-full px-4 md:px-8 py-4 md:py-6 flex justify-between items-center bg-transparent z-50 relative"
     >
       <div
         class="hidden md:flex gap-8 text-sm uppercase tracking-widest font-medium"
@@ -94,9 +96,7 @@
         <a class="hover:text-primary transition-colors" href="#">Shop</a>
         <a class="hover:text-primary transition-colors" href="#">Learn</a>
       </div>
-      <div
-        class="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2"
-      >
+      <div>
         <h1
           class="font-display text-lg md:text-3xl tracking-[0.1em] font-bold text-black dark:text-white uppercase whitespace-nowrap"
         >
@@ -104,12 +104,12 @@
         </h1>
       </div>
       <div
-        class="flex items-center gap-6 md:gap-8 text-sm uppercase tracking-widest font-medium"
+        class="flex items-center gap-4 md:gap-8 text-sm uppercase tracking-widest font-medium"
       >
         <a class="hidden md:block hover:text-primary transition-colors" href="#"
           >Account</a
         >
-        <div class="relative group cursor-pointer">
+        <div class="relative group cursor-pointer hidden md:block">
           <span
             class="hover:text-primary transition-colors flex items-center gap-1"
           >
@@ -127,21 +127,64 @@
         >
           <span class="material-icons text-xl align-middle">brightness_4</span>
         </button>
+        <button id="hamburger-btn" class="md:hidden p-2" aria-label="Open Menu">
+          <span class="material-icons">menu</span>
+        </button>
       </div>
-      <button class="md:hidden p-2">
-        <span class="material-icons">menu</span>
-      </button>
     </nav>
 
+    <!-- Mobile Nav Panel -->
+    <div
+      id="mobile-nav"
+      class="fixed inset-0 z-[100] pointer-events-none opacity-0 transition-opacity duration-300"
+    >
+      <div
+        class="absolute inset-0 bg-black/60 backdrop-blur-sm"
+        id="mobile-nav-backdrop"
+      ></div>
+      <div
+        class="absolute top-0 right-0 w-72 h-full bg-white dark:bg-zinc-900 shadow-2xl p-8 flex flex-col gap-6 translate-x-full transition-transform duration-300"
+        id="mobile-nav-panel"
+      >
+        <button id="close-nav-btn" class="self-end p-2" aria-label="Close Menu">
+          <span class="material-icons text-2xl">close</span>
+        </button>
+        <a
+          class="text-lg uppercase tracking-widest font-medium hover:text-primary transition-colors"
+          href="#"
+          >Shop</a
+        >
+        <a
+          class="text-lg uppercase tracking-widest font-medium hover:text-primary transition-colors"
+          href="#"
+          >Learn</a
+        >
+        <a
+          class="text-lg uppercase tracking-widest font-medium hover:text-primary transition-colors"
+          href="#"
+          >Account</a
+        >
+        <div
+          class="flex items-center gap-2 text-lg uppercase tracking-widest font-medium cursor-pointer"
+        >
+          Cart
+          <span
+            class="inline-flex items-center justify-center w-6 h-6 rounded-full border border-current text-[10px]"
+            >0</span
+          >
+        </div>
+      </div>
+    </div>
+
     <main
-      class="flex-grow relative w-full max-w-7xl mx-auto px-4 py-8 md:px-6 md:py-20 flex flex-col md:flex-row items-center justify-center min-h-[60vh] md:min-h-auto"
+      class="flex-grow relative w-full max-w-7xl mx-auto px-4 py-8 md:px-6 md:py-20 flex flex-col md:flex-row items-center justify-center min-h-[85vh] md:min-h-auto"
     >
       <div
         class="absolute bottom-10 left-[-5%] md:left-10 w-24 md:w-64 opacity-90 scatter-img z-0 rotate-[-15deg] hidden md:block"
       >
         <img
           alt="Artisanal toast with paprika and toppings"
-          class="w-full h-auto drop-shadow-xl rounded-lg"
+          class="w-full h-auto drop-shadow-xl rounded-lg object-cover"
           src="https://lh3.googleusercontent.com/aida-public/AB6AXuCdhfkP-0pqHDlurIL9IVBDkqfowWIPTcVrI-J775OJ5iAM-q2oX9-OvVnTRu3TAkjryGxNt3nM0Da62NYIDN8SFR7JyohAmXFZebI4J0NeO440MgrYXBcSafeqP4zF-IjS59JNrjKTxqjAf2xIUtpCuJcENwdjvPfY-Vt-fJ6DtWFIf_hCwWmwcN0r6PgnVvsXs2xO_jYGodXDyRt9De5l1TS6tS9FYLxxL8I--beddBoh4KCwXXON3OsAaw3tIeTOqiTKVdW1TC-c"
         />
       </div>
@@ -150,17 +193,17 @@
       >
         <img
           alt="Toast with fresh strawberries and cream"
-          class="w-full h-auto drop-shadow-2xl rounded-lg"
+          class="w-full h-auto drop-shadow-2xl rounded-lg object-cover"
           src="https://lh3.googleusercontent.com/aida-public/AB6AXuC6MUFluuuveRpAJ6hQNSxYxs8Cikfr9on3hOb-9baFZ0udyXNlLqpk_rOkYpWu9cXFXWBT0xnneO0OturLXu4H2FMAx6ePUL8RBslGvxdZS5B61w-883rou-wJJB8y71Fod0LQtfvY4tV9T4MXGs8UBEFCoTCOXLqMejvCEUV0g-ZcakXTbnYPQ-ayRoVyF0wN7GYs-CE_AVKllq9ZGWnB0ZAnrPQYtf-QVYrVFDl4gf0shhlkrCf1OOuzQiRFQts7foi_wfxpIQAG"
         />
       </div>
       <div
-        class="absolute top-1/2 right-[-20%] md:right-[-5%] transform -translate-y-1/2 w-[300px] md:w-[500px] scatter-img z-0 hidden md:block"
+        class="absolute top-[5%] right-0 md:top-1/2 md:right-[2%] md:-translate-y-1/2 w-[160px] md:w-[500px] scatter-img z-0"
       >
         <div class="relative">
           <img
             alt="Top down view of french toast on a plate"
-            class="w-full h-auto rounded-full shadow-2xl object-cover aspect-square"
+            class="w-full h-auto rounded-full shadow-2xl object-cover aspect-square opacity-30 md:opacity-100"
             src="https://lh3.googleusercontent.com/aida-public/AB6AXuDuQAncG66OkY5CWIB9OisoRYoSnbImLezOH8ai7-ijYdlAxTmXLpKU28oC3Q2YjVmUUGSkai4-kMNZgcdTQPRdSI_uciS_xKfgPpMQ8-LtuEXTCmPz7lDviCbpJHjApf6qHTo6PnzCr5_GdbRM8AeqK-kQ-_QNwY9tTdpQmusbT9maU9356oKZYbRTlLztB_gREFQsT9fuer8VkEB6UY6jjD7c-As67ru-fWX8sqRvMVW8s5nYFgWRnP2cwf559ohS3kua1qY5MsMT"
           />
         </div>
@@ -175,10 +218,10 @@
         >
       </div>
       <div
-        class="relative z-20 text-center md:text-left md:max-w-2xl mt-8 md:mt-0 md:ml-20"
+        class="relative z-20 text-center md:text-left md:max-w-3xl mt-8 md:mt-0 md:ml-20"
       >
         <h2
-          class="font-display text-4xl sm:text-5xl md:text-7xl lg:text-8xl leading-[1.1] md:leading-[0.9] text-primary mb-6 md:mb-8 animate-fade-in-up"
+          class="font-display text-[clamp(2rem,10vw,3.5rem)] sm:text-5xl md:text-7xl lg:text-8xl leading-[1.1] md:leading-[0.9] text-primary mb-6 md:mb-8"
         >
           They are baked <br />
           <span class="italic font-light text-black dark:text-white"
@@ -204,21 +247,19 @@
     </main>
 
     <footer
-      class="w-full py-6 px-8 flex justify-between items-end text-xs uppercase tracking-widest text-text-light/60 dark:text-text-dark/60 z-20 pointer-events-none"
+      class="w-full py-4 md:py-6 px-4 md:px-8 flex flex-col md:flex-row justify-center md:justify-between items-center md:items-end gap-3 md:gap-0 text-xs uppercase tracking-widest text-text-light/60 dark:text-text-dark/60 z-20"
     >
-      <div class="pointer-events-auto">
+      <div class="order-2 md:order-1">
         <p>© 2023 Heavenly Bakes by Divya</p>
       </div>
-      <div
-        class="absolute bottom-8 left-1/2 transform -translate-x-1/2 pointer-events-auto"
-      >
+      <div class="order-1 md:order-2">
         <button
-          class="bg-white dark:bg-zinc-800 text-black dark:text-white px-6 py-2 rounded-full shadow-lg flex items-center gap-2 text-xs font-bold hover:scale-105 transition-transform"
+          class="bg-white dark:bg-zinc-800 text-black dark:text-white px-6 py-2 rounded-full shadow-lg flex items-center gap-2 text-xs font-bold hover:scale-105 transition-transform cursor-pointer"
         >
           Menu <span class="material-icons text-sm">menu</span>
         </button>
       </div>
-      <div class="text-right pointer-events-auto hidden md:block max-w-xs">
+      <div class="text-center md:text-right hidden md:block max-w-xs order-3">
         <p>Space unfold in light and shadow,</p>
         <p>where structure finds its quiet rhythm.</p>
       </div>
@@ -235,5 +276,36 @@
     ></script>
 
     <script type="module" src="/script.js"></script>
+
+    <!-- Mobile Nav Toggle (inline to avoid module delay) -->
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const hamburger = document.getElementById("hamburger-btn");
+        const mobileNav = document.getElementById("mobile-nav");
+        const closeBtn = document.getElementById("close-nav-btn");
+        const backdrop = document.getElementById("mobile-nav-backdrop");
+        const panel = document.getElementById("mobile-nav-panel");
+
+        function openNav() {
+          mobileNav.classList.remove("pointer-events-none", "opacity-0");
+          mobileNav.classList.add("pointer-events-auto", "opacity-100");
+          panel.classList.remove("translate-x-full");
+          panel.classList.add("translate-x-0");
+          document.body.style.overflow = "hidden";
+        }
+
+        function closeNav() {
+          mobileNav.classList.add("pointer-events-none", "opacity-0");
+          mobileNav.classList.remove("pointer-events-auto", "opacity-100");
+          panel.classList.add("translate-x-full");
+          panel.classList.remove("translate-x-0");
+          document.body.style.overflow = "";
+        }
+
+        if (hamburger) hamburger.addEventListener("click", openNav);
+        if (closeBtn) closeBtn.addEventListener("click", closeNav);
+        if (backdrop) backdrop.addEventListener("click", closeNav);
+      });
+    </script>
   </body>
 </html>

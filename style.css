@@ -13,8 +13,14 @@
   box-sizing: border-box;
 }
 
+html {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
 body {
   font-family: "Host Grotesk", sans-serif;
+  overflow-x: hidden;
 }
 
 img {
@@ -29,6 +35,11 @@ img {
   height: 100%;
 }
 
+/* ================================================
+   Legacy hero/content rules (preloader sections).
+   These target classes used by the preloader layer
+   and potential future hero sections.
+   ================================================ */
 .hero {
   width: 100%;
   height: 100svh;
@@ -137,6 +148,10 @@ img {
   line-height: 1;
 }
 
+/* ================================================
+   Preloader styles (active - used by GSAP timeline)
+   z-index: 60+ to sit ABOVE nav (z-50) during load
+   ================================================ */
 .preloader-progress,
 .preloader-mask,
 .preloader-content {
@@ -159,7 +174,7 @@ img {
   );
   background-size: 200% 200%;
   animation: backgroundShift 8s ease infinite;
-  z-index: 1;
+  z-index: 60;
   will-change: opacity, background-position;
 }
 
@@ -214,11 +229,11 @@ img {
     url("/mask.svg") center/50% no-repeat;
   mask-composite: subtract;
   will-change: transform;
-  z-index: 1;
+  z-index: 60;
 }
 
 .preloader-content {
-  z-index: 2;
+  z-index: 62;
 }
 
 .preloader-footer {
@@ -228,6 +243,8 @@ img {
   transform: translateX(-50%);
   width: 30%;
   text-align: center;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
 }
 
 .preloader-footer p {
@@ -242,7 +259,9 @@ img {
   will-change: transform;
 }
 
-/* Tablet: 768px - 1024px */
+/* ================================================
+   Tablet: 768px - 1024px
+   ================================================ */
 @media (max-width: 1024px) {
   .header h1 {
     font-size: 8rem;
@@ -263,7 +282,9 @@ img {
   }
 }
 
-/* Phone: < 768px - Mobile-First Redesign */
+/* ================================================
+   Phone: < 768px
+   ================================================ */
 @media (max-width: 768px) {
   .hero {
     padding: 0.5rem;
@@ -273,7 +294,6 @@ img {
     border-radius: 1.5rem;
   }
 
-  /* Gradient overlay for text readability */
   .hero-img::after {
     content: "";
     position: absolute;
@@ -296,7 +316,6 @@ img {
     align-items: center;
   }
 
-  /* Centered header at 40% from top */
   .header {
     position: absolute;
     top: 35%;
@@ -315,7 +334,6 @@ img {
     text-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
   }
 
-  /* Buttons stacked at bottom - thumb-friendly zone */
   .contact-btn {
     position: absolute;
     bottom: 6rem;
@@ -339,12 +357,11 @@ img {
     justify-content: center;
   }
 
-  /* Hide footer on mobile - too cramped */
   .hero-footer {
     display: none;
   }
 
-  /* Preloader adjustments */
+  /* Preloader mobile adjustments */
   .preloader-progress-bar {
     left: 0%;
     width: 100%;
@@ -352,15 +369,42 @@ img {
   }
 
   .preloader-logo h1 {
-    font-size: 2rem;
+    font-size: 1.5rem;
+  }
+
+  .preloader-mask {
+    mask:
+      linear-gradient(var(--base-300), var(--base-300)),
+      url("/mask.svg") center/60% no-repeat;
+    mask-composite: subtract;
   }
 
   .preloader-footer {
-    width: 85%;
+    width: 80%;
     bottom: 2rem;
+    padding: 0 1rem;
   }
 
   .preloader-footer p {
-    font-size: 0.9rem;
+    font-size: 0.75rem;
+    line-height: 1.4;
+  }
+}
+
+/* ================================================
+   Accessibility: Reduced Motion
+   ================================================ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .preloader-progress {
+    animation: none;
   }
 }

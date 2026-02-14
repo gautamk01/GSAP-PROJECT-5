@@ -8,7 +8,6 @@ document.fonts.ready.then(() => {
     const split = {};
 
     elements.forEach(({ key, selector, type }) => {
-      // Check if element exists before splitting to avoid errors
       if (document.querySelector(selector)) {
         const config = { type, mask: type };
         if (type === "chars") config.charsClass = "char";
@@ -19,25 +18,20 @@ document.fonts.ready.then(() => {
     return split;
   }
 
-  // Updated selectors for Miche Bakery layout
-  const splitElements = [
+  // Preloader splits (always needed, viewport-independent)
+  const preloaderSplits = [
     { key: "logoChars", selector: ".preloader-logo h1", type: "chars" },
     { key: "footerLine", selector: ".preloader-footer p", type: "lines" },
-    // New selectors
-    { key: "headlineChars", selector: "main h2", type: "chars" },
-    { key: "subtextLines", selector: "main p", type: "lines" },
   ];
 
-  const split = createSplitTexts(splitElements);
+  const split = createSplitTexts(preloaderSplits);
 
-  // Set initial states (hidden)
+  // Set preloader initial states
   if (split.footerLine) gsap.set(split.footerLine.words, { y: "100%" });
-  if (split.headlineChars) gsap.set(split.headlineChars.chars, { y: "100%" });
-  if (split.subtextLines) gsap.set(split.subtextLines.lines, { y: "100%" });
 
-  // New elements initial states
-  gsap.set(".scatter-img", { scale: 0, opacity: 0 });
-  gsap.set(".btn-oval", { scale: 0, opacity: 0 });
+  // Hide page content during preloader (nav, main, footer)
+  // NOTE: Do NOT include #mobile-nav here — it uses CSS class toggle
+  gsap.set("nav, main, footer", { autoAlpha: 0 });
 
   function animateProgress(duration = 4) {
     const tl = gsap.timeline();
@@ -59,9 +53,11 @@ document.fonts.ready.then(() => {
     return tl;
   }
 
+  const isMobile = window.matchMedia("(max-width: 767px)").matches;
+
+  // === PRELOADER TIMELINE (universal — same on all viewports) ===
   const t1 = gsap.timeline({ delay: 0.5 });
 
-  // --- Preloader Animation (Unchanged Logic, just targeting valid elements) ---
   if (split.logoChars) {
     t1.to(split.logoChars.chars, {
       x: "0%",
@@ -81,7 +77,7 @@ document.fonts.ready.then(() => {
 
   t1.add(animateProgress(), "<").set(".preloader-progress", {
     backgroundColor: "#f5f5f5",
-  }); // var(--base-300)
+  });
 
   if (split.logoChars) {
     t1.to(
@@ -99,63 +95,142 @@ document.fonts.ready.then(() => {
     );
   }
 
-  t1.to(
-    ".preloader-progress",
-    { opacity: 0, duration: 0.5, ease: "power3.out" },
-    "-=0.25",
-  ).to(".preloader-mask", { scale: 5, duration: 2.5, ease: "power3.out" }, "<");
+  // === PRELOADER EXIT (different approach for mobile vs desktop) ===
+  if (isMobile) {
+    // Mobile: smooth crossfade — no jarring mask scale
+    t1.to(
+      ".preloader-progress",
+      { autoAlpha: 0, duration: 0.6, ease: "power2.inOut" },
+      "-=0.25",
+    )
+      .to(
+        ".preloader-mask",
+        { autoAlpha: 0, duration: 0.8, ease: "power2.inOut" },
+        "<",
+      )
+      .to(
+        ".preloader-content",
+        { autoAlpha: 0, duration: 0.4, ease: "power2.inOut" },
+        "<",
+      )
+      .set(".preloader-progress, .preloader-mask, .preloader-content", {
+        display: "none",
+      });
+  } else {
+    // Desktop: original mask scale reveal (looks great on large screens)
+    t1.to(
+      ".preloader-progress",
+      { opacity: 0, duration: 0.5, ease: "power3.out" },
+      "-=0.25",
+    )
+      .to(
+        ".preloader-mask",
+        { scale: 5, duration: 2.5, ease: "power3.out" },
+        "<",
+      )
+      .set(".preloader-progress, .preloader-mask, .preloader-content", {
+        autoAlpha: 0,
+        display: "none",
+      });
+  }
 
-  // --- Reveal New Miche Bakery Content ---
-  // Animate the scattered images
+  // === REVEAL PAGE CONTENT ===
+  // Nav fades in first
   t1.to(
-    ".scatter-img",
-    {
-      scale: 1,
-      opacity: 1,
-      duration: 1.5,
-      ease: "power3.out",
-      stagger: 0.2,
-    },
-    "-=1.5", // Overlap with mask reveal
+    "nav",
+    { autoAlpha: 1, duration: 0.6, ease: "power2.out" },
+    isMobile ? "-=0.3" : "-=1.5",
   );
 
-  // Animate Headline
-  if (split.headlineChars) {
-    t1.to(
-      split.headlineChars.chars,
-      {
-        y: 0,
-        stagger: 0.03,
-        duration: 1,
-        ease: "power4.out",
-      },
-      "-=1.0",
-    );
-  }
-
-  // Animate Subtext
-  if (split.subtextLines) {
-    t1.to(
-      split.subtextLines.lines,
-      {
-        y: 0,
-        stagger: 0.1,
-        duration: 1,
-        ease: "power4.out",
-      },
-      "-=0.8",
-    );
-  }
-
-  // Animate Button
-  t1.to(
-    ".btn-oval",
+  // === CONTENT REVEAL (viewport-aware via matchMedia) ===
+  gsap.matchMedia().add(
     {
-      scale: 1,
-      opacity: 1,
-      duration: 1,
-      ease: "power4.out",
+      isDesktop: "(min-width: 768px)",
+      isMobile: "(max-width: 767px)",
     },
-    "-=0.8",
+    (context) => {
+      const { isDesktop } = context.conditions;
+
+      // Re-create SplitText inside matchMedia so it splits based on current layout
+      const contentSplits = [
+        { key: "headlineChars", selector: "main h2", type: "chars" },
+        { key: "subtextLines", selector: "main p", type: "lines" },
+      ];
+      const contentSplit = createSplitTexts(contentSplits);
+
+      // Set initial states (hidden)
+      if (contentSplit.headlineChars)
+        gsap.set(contentSplit.headlineChars.chars, { y: "100%" });
+      if (contentSplit.subtextLines)
+        gsap.set(contentSplit.subtextLines.lines, { y: "100%" });
+      gsap.set(".scatter-img", { scale: 0, opacity: 0 });
+      gsap.set(".btn-oval", { scale: 0, opacity: 0 });
+
+      // Show main + footer containers (content still hidden via individual animations)
+      t1.to(
+        "main, footer",
+        { autoAlpha: 1, duration: 0.4, ease: "power2.out" },
+        isDesktop ? "-=1.5" : "-=0.2",
+      );
+
+      // Scatter images reveal
+      t1.to(
+        ".scatter-img",
+        {
+          scale: 1,
+          opacity: isDesktop ? 1 : 0.3,
+          duration: isDesktop ? 1.5 : 1,
+          ease: "power3.out",
+          stagger: isDesktop ? 0.2 : 0.1,
+        },
+        isDesktop ? "-=1.5" : "-=0.3",
+      );
+
+      // Headline chars reveal
+      if (contentSplit.headlineChars) {
+        t1.to(
+          contentSplit.headlineChars.chars,
+          {
+            y: 0,
+            stagger: isDesktop ? 0.03 : 0.02,
+            duration: isDesktop ? 1 : 0.8,
+            ease: "power4.out",
+          },
+          isDesktop ? "-=1.0" : "-=0.6",
+        );
+      }
+
+      // Subtext lines reveal
+      if (contentSplit.subtextLines) {
+        t1.to(
+          contentSplit.subtextLines.lines,
+          {
+            y: 0,
+            stagger: 0.1,
+            duration: isDesktop ? 1 : 0.8,
+            ease: "power4.out",
+          },
+          "-=0.8",
+        );
+      }
+
+      // Button reveal
+      t1.to(
+        ".btn-oval",
+        {
+          scale: 1,
+          opacity: 1,
+          duration: isDesktop ? 1 : 0.8,
+          ease: "power4.out",
+        },
+        "-=0.8",
+      );
+
+      // Cleanup: revert SplitText on context change
+      return () => {
+        if (contentSplit.headlineChars) contentSplit.headlineChars.revert();
+        if (contentSplit.subtextLines) contentSplit.subtextLines.revert();
+      };
+    },
   );
 });
