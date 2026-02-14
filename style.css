@@ -149,9 +149,30 @@ img {
 }
 
 .preloader-progress {
-  background-color: var(--base-200);
+  background: linear-gradient(
+    135deg,
+    #181717 0%,
+    #2c2a28 25%,
+    #151414 50%,
+    #2c2a28 75%,
+    #181717 100%
+  );
+  background-size: 200% 200%;
+  animation: backgroundShift 8s ease infinite;
   z-index: 1;
-  will-change: opacity;
+  will-change: opacity, background-position;
+}
+
+@keyframes backgroundShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 .preloader-progress-bar {
@@ -221,45 +242,109 @@ img {
   will-change: transform;
 }
 
-@media (max-width: 800px) {
-  .hero-inner {
-    border-radius: 3rem;
-  }
-
+/* Tablet: 768px - 1024px */
+@media (max-width: 1024px) {
   .header h1 {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-    width: 100%;
-    font-size: 4rem;
-    letter-spacing: 0;
-  }
-
-  .hero-footer {
-    flex-direction: column;
-    gap: 0.5rem;
-    align-items: flex-start;
-  }
-
-  .hero-footer h3,
-  .hero-footer p {
-    width: 100%;
-    text-align: left;
+    font-size: 8rem;
+    letter-spacing: -0.15rem;
   }
 
   .hero-footer h3 {
-    font-size: 1.25rem;
+    font-size: 1.5rem;
+    width: 30%;
+  }
+
+  .hero-footer p {
+    width: 30%;
+  }
+
+  .preloader-footer {
+    width: 50%;
+  }
+}
+
+/* Phone: < 768px - Mobile-First Redesign */
+@media (max-width: 768px) {
+  .hero {
+    padding: 0.5rem;
+  }
+
+  .hero-inner {
+    border-radius: 1.5rem;
+  }
+
+  /* Gradient overlay for text readability */
+  .hero-img::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to top,
+      rgba(24, 23, 23, 0.95) 0%,
+      rgba(24, 23, 23, 0.6) 40%,
+      rgba(24, 23, 23, 0.3) 70%,
+      transparent 100%
+    );
+    pointer-events: none;
+  }
+
+  .hero-content {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  /* Centered header at 40% from top */
+  .header {
+    position: absolute;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    text-align: center;
+  }
+
+  .header h1 {
+    font-size: clamp(2.5rem, 11vw, 3.5rem);
+    position: static;
+    transform: none;
+    width: 100%;
+    letter-spacing: -0.05rem;
+    text-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+  }
+
+  /* Buttons stacked at bottom - thumb-friendly zone */
+  .contact-btn {
+    position: absolute;
+    bottom: 6rem;
+    top: auto;
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
   }
 
   .menu-btn {
     position: absolute;
-    top: 2rem;
-    left: 2rem;
-    transform: translatex(0%);
+    bottom: 2rem;
+    top: auto;
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
   }
 
+  .btn {
+    min-width: 140px;
+    justify-content: center;
+  }
+
+  /* Hide footer on mobile - too cramped */
+  .hero-footer {
+    display: none;
+  }
+
+  /* Preloader adjustments */
   .preloader-progress-bar {
     left: 0%;
     width: 100%;
@@ -267,13 +352,15 @@ img {
   }
 
   .preloader-logo h1 {
-    mask:
-      linear-gradient(var(--base-300), var(--base-300)),
-      url("/mask.svg") center/90% no-repeat;
-    mask-composite: subtract;
+    font-size: 2rem;
   }
 
   .preloader-footer {
-    width: 75%;
+    width: 85%;
+    bottom: 2rem;
+  }
+
+  .preloader-footer p {
+    font-size: 0.9rem;
   }
 }
