@@ -1,8 +1,20 @@
 import gsap from "gsap";
 import SplitText from "gsap/SplitText";
 import ScrollTrigger from "gsap/ScrollTrigger";
+import Lenis from "lenis";
+import "lenis/dist/lenis.css";
 
 gsap.registerPlugin(SplitText, ScrollTrigger);
+
+// === LENIS SMOOTH SCROLL ===
+const lenis = new Lenis({
+  lerp: 0.1,
+  smoothWheel: true,
+  syncTouch: true,
+});
+lenis.on("scroll", ScrollTrigger.update);
+gsap.ticker.add((time) => lenis.raf(time * 1000));
+gsap.ticker.lagSmoothing(0);
 
 document.fonts.ready.then(() => {
   function createSplitTexts(elements) {
@@ -523,5 +535,276 @@ document.addEventListener("DOMContentLoaded", () => {
     if (e.key === "Escape" && !modal.classList.contains("opacity-0")) {
       closeModal();
     }
+  });
+});
+
+// ===== SCATTER GALLERY =====
+document.addEventListener("DOMContentLoaded", () => {
+  const gallery = document.querySelector(".scatter-gallery");
+  const galleryHeading = document.querySelector(".scatter-heading");
+  if (!gallery || !galleryHeading) return;
+
+  // All bakery images — cycled across cards
+  const IMAGES = [
+    { src: "/images/chocolate-cake.png", alt: "Chocolate layer cake" },
+    { src: "/images/gallery-cupcakes.png", alt: "Pastel cupcakes" },
+    { src: "/images/artisan-bread.png", alt: "Artisan sourdough bread" },
+    { src: "/images/gallery-cinnamon-rolls.png", alt: "Cinnamon rolls" },
+    { src: "/images/celebration-cake.png", alt: "Celebration cake" },
+    { src: "/images/gallery-macarons.png", alt: "French macarons" },
+    { src: "/images/pastries.png", alt: "Pastries platter" },
+    { src: "/images/assorted-cookies.png", alt: "Assorted cookies" },
+    { src: "/images/baker-story.png", alt: "Baker at work" },
+  ];
+
+  // Bakery-themed headings for each scroll section
+  const HEADINGS = [
+    "Every creation begins with flour, butter & a little bit of magic",
+    "Layered with love, frosted with care, baked to perfection",
+    "From our oven to your celebration — every bite tells a story",
+    "These are the moments we bake for",
+  ];
+
+  function getResponsiveConfig() {
+    const w = window.innerWidth;
+    if (w <= 480) return { cardCount: 6, cardWidth: 120, cardHeight: 150 };
+    if (w <= 768) return { cardCount: 8, cardWidth: 150, cardHeight: 190 };
+    if (w <= 1024) return { cardCount: 12, cardWidth: 200, cardHeight: 250 };
+    return { cardCount: 15, cardWidth: 250, cardHeight: 300 };
+  }
+
+  const CONFIG = {
+    ...getResponsiveConfig(),
+    animationDuration: 0.6,
+    animationOverlap: 0.35,
+    headingFadeDuration: 0.3,
+  };
+
+  // Exclusion zone: cards must stay outside this center box (heading area)
+  const EXCLUSION = { wRatio: 0.3, hRatio: 0.25 };
+
+  let state = {
+    activeCards: [],
+    currentSection: 0,
+    isAnimating: false,
+  };
+
+  function getEdgePosition(cx, cy) {
+    const distances = {
+      left: cx,
+      right: window.innerWidth - cx,
+      top: cy,
+      bottom: window.innerHeight - cy,
+    };
+    const minDistance = Math.min(...Object.values(distances));
+    const offsetX = CONFIG.cardWidth / 2;
+    const offsetY = CONFIG.cardHeight / 2;
+    const vary = () => (Math.random() - 0.5) * 300;
+
+    if (minDistance === distances.left)
+      return {
+        x: -CONFIG.cardWidth - Math.random() * 150,
+        y: cy - offsetY + vary(),
+      };
+    if (minDistance === distances.right)
+      return {
+        x: window.innerWidth + 50 + Math.random() * 150,
+        y: cy - offsetY + vary(),
+      };
+    if (minDistance === distances.top)
+      return {
+        x: cx - offsetX + vary(),
+        y: -CONFIG.cardHeight - Math.random() * 150,
+      };
+    return {
+      x: cx - offsetX + vary(),
+      y: window.innerHeight + 50 + Math.random() * 150,
+    };
+  }
+
+  function isInExclusionZone(x, y) {
+    const cw = window.innerWidth;
+    const ch = window.innerHeight;
+    const exW = cw * EXCLUSION.wRatio;
+    const exH = ch * EXCLUSION.hRatio;
+    const exLeft = (cw - exW) / 2;
+    const exTop = (ch - exH) / 2;
+    return (
+      x + CONFIG.cardWidth > exLeft &&
+      x < exLeft + exW &&
+      y + CONFIG.cardHeight > exTop &&
+      y < exTop + exH
+    );
+  }
+
+  function createCards(setIndex) {
+    const cards = [];
+    const offset = (setIndex * 3) % IMAGES.length;
+    const pad = 20; // padding from viewport edge
+
+    for (let i = 0; i < CONFIG.cardCount; i++) {
+      const card = document.createElement("div");
+      card.classList.add("scatter-card");
+      card.style.width = CONFIG.cardWidth + "px";
+      card.style.height = CONFIG.cardHeight + "px";
+
+      const imgData = IMAGES[(i + offset) % IMAGES.length];
+      const img = document.createElement("img");
+      img.src = imgData.src;
+      img.loading = "eager";
+      img.alt = imgData.alt;
+      card.appendChild(img);
+
+      // Random position across entire viewport, retry if in exclusion zone
+      let x, y;
+      let attempts = 0;
+      do {
+        x =
+          pad +
+          Math.random() * (window.innerWidth - CONFIG.cardWidth - pad * 2);
+        y =
+          pad +
+          Math.random() * (window.innerHeight - CONFIG.cardHeight - pad * 2);
+        attempts++;
+      } while (isInExclusionZone(x, y) && attempts < 30);
+
+      const cx = x + CONFIG.cardWidth / 2;
+      const cy = y + CONFIG.cardHeight / 2;
+
+      gsap.set(card, {
+        x: x,
+        y: y,
+        rotation: Math.random() * 30 - 15,
+        force3D: true,
+      });
+
+      gallery.appendChild(card);
+      cards.push({ element: card, centerX: cx, centerY: cy });
+    }
+    return cards;
+  }
+
+  function animateHeading(newText) {
+    const tl = gsap.timeline();
+    tl.to(galleryHeading, {
+      opacity: 0,
+      duration: CONFIG.headingFadeDuration,
+      ease: "power2.inOut",
+    })
+      .call(() => {
+        galleryHeading.textContent = newText;
+      })
+      .to(galleryHeading, {
+        opacity: 1,
+        duration: CONFIG.headingFadeDuration,
+        ease: "power2.inOut",
+      });
+    return tl;
+  }
+
+  function animateCards(exitingCards, enteringCards) {
+    const tl = gsap.timeline();
+
+    exitingCards.forEach(({ element, centerX, centerY }) => {
+      const edge = getEdgePosition(centerX, centerY);
+      tl.to(
+        element,
+        {
+          x: edge.x,
+          y: edge.y,
+          rotation: Math.random() * 180 - 90,
+          duration: CONFIG.animationDuration,
+          ease: "power2.in",
+          force3D: true,
+          onComplete: () => element.remove(),
+        },
+        0,
+      );
+    });
+
+    enteringCards.forEach(({ element, centerX, centerY }) => {
+      const edge = getEdgePosition(centerX, centerY);
+      gsap.set(element, {
+        x: edge.x,
+        y: edge.y,
+        rotation: Math.random() * 180 - 90,
+        force3D: true,
+      });
+      tl.to(
+        element,
+        {
+          x: centerX - CONFIG.cardWidth / 2,
+          y: centerY - CONFIG.cardHeight / 2,
+          rotation: Math.random() * 40 - 20,
+          duration: CONFIG.animationDuration,
+          ease: "power2.out",
+          force3D: true,
+        },
+        CONFIG.animationOverlap,
+      );
+    });
+
+    return tl;
+  }
+
+  function transitionToSection(targetSection) {
+    if (state.isAnimating || targetSection === state.currentSection) return;
+    state.isAnimating = true;
+    const newCards = createCards(targetSection);
+
+    const masterTl = gsap.timeline({
+      onComplete: () => {
+        state.activeCards = newCards;
+        state.currentSection = targetSection;
+        state.isAnimating = false;
+      },
+    });
+
+    masterTl.add(animateCards(state.activeCards, newCards), 0);
+    masterTl.add(animateHeading(HEADINGS[targetSection]), 0);
+  }
+
+  function getSectionIndex(progress) {
+    if (progress < 0.25) return 0;
+    if (progress < 0.5) return 1;
+    if (progress < 0.75) return 2;
+    return 3;
+  }
+
+  function reinitialize() {
+    state.activeCards.forEach(({ element }) => element.remove());
+    const responsive = getResponsiveConfig();
+    CONFIG.cardCount = responsive.cardCount;
+    CONFIG.cardWidth = responsive.cardWidth;
+    CONFIG.cardHeight = responsive.cardHeight;
+    state.activeCards = createCards(state.currentSection);
+  }
+
+  // Initialize scatter gallery
+  state.activeCards = createCards(0);
+  galleryHeading.textContent = HEADINGS[0];
+  gsap.set(galleryHeading, { opacity: 1 });
+
+  // ScrollTrigger pins the gallery and drives transitions
+  ScrollTrigger.create({
+    trigger: ".scatter-gallery",
+    start: "top top",
+    end: () => `+=${window.innerHeight * 5}`,
+    pin: true,
+    pinSpacing: true,
+    onUpdate: ({ progress }) => {
+      const targetSection = getSectionIndex(progress);
+      transitionToSection(targetSection);
+    },
+  });
+
+  // Recalculate on resize
+  let resizeTimer;
+  window.addEventListener("resize", () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      reinitialize();
+      ScrollTrigger.refresh();
+    }, 250);
   });
 });
