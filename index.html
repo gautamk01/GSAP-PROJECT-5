@@ -345,219 +345,469 @@
     <!-- ===== SECTION 3: MENU ===== -->
     <section
       id="menu"
-      class="w-full py-20 md:py-32 bg-background-light dark:bg-background-dark"
+      class="w-full py-20 md:py-32 bg-background-light dark:bg-background-dark relative overflow-hidden"
     >
-      <div class="max-w-6xl mx-auto px-6 md:px-8">
-        <div class="text-center mb-16 reveal-section">
+      <!-- Animated background gradient -->
+      <div class="menu-bg-gradient absolute inset-0 opacity-30"></div>
+
+      <div class="max-w-6xl mx-auto px-6 md:px-8 relative z-10">
+        <!-- Menu Header -->
+        <div class="text-center mb-16 menu-header">
           <p
-            class="text-xs uppercase tracking-[0.3em] text-primary font-medium mb-4"
+            class="menu-subtitle text-xs uppercase tracking-[0.3em] text-primary font-medium mb-4 opacity-0"
           >
             What We Bake
           </p>
           <h3
-            class="font-display text-3xl md:text-5xl text-black dark:text-white"
+            class="menu-title font-display text-3xl md:text-5xl text-black dark:text-white overflow-hidden"
           >
-            Our Menu
+            <span class="menu-title-text inline-block">Our Menu</span>
           </h3>
+          <div
+            class="menu-line w-12 h-[1px] bg-primary mx-auto mt-6 origin-center"
+          ></div>
         </div>
+
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           <!-- Cakes -->
-          <div class="group reveal-section cursor-pointer">
-            <div class="overflow-hidden rounded-2xl mb-4">
+          <div class="group menu-item cursor-pointer relative" data-menu-index="0">
+            <div class="menu-img-wrap overflow-hidden rounded-2xl mb-4 relative">
+              <div class="menu-img-overlay absolute inset-0 bg-primary opacity-0 z-10 rounded-2xl"></div>
               <img
                 src="/images/chocolate-cake.png"
                 alt="Chocolate cake with ganache and berries"
-                class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-105"
+                class="w-full h-64 object-cover"
                 loading="lazy"
               />
             </div>
-            <h4
-              class="font-display text-xl md:text-2xl text-black dark:text-white mb-1"
-            >
-              Signature Cakes
-            </h4>
-            <p
-              class="font-body text-sm text-text-light/60 dark:text-text-dark/60 mb-3"
-            >
-              Chocolate, Red Velvet, Butterscotch & more
-            </p>
-            <p class="text-primary font-medium text-sm">DM for pricing →</p>
+            <div class="menu-text">
+              <h4
+                class="font-display text-xl md:text-2xl text-black dark:text-white mb-1"
+              >
+                Signature Cakes
+              </h4>
+              <p
+                class="font-body text-sm text-text-light/60 dark:text-text-dark/60 mb-3"
+              >
+                Chocolate, Red Velvet, Butterscotch & more
+              </p>
+              <p class="text-primary font-medium text-sm inline-flex items-center gap-1">
+                DM for pricing
+                <span class="menu-arrow inline-block transition-transform">→</span>
+              </p>
+            </div>
           </div>
           <!-- Cookies -->
-          <div class="group reveal-section cursor-pointer">
-            <div class="overflow-hidden rounded-2xl mb-4">
+          <div class="group menu-item cursor-pointer relative" data-menu-index="1">
+            <div class="menu-img-wrap overflow-hidden rounded-2xl mb-4 relative">
+              <div class="menu-img-overlay absolute inset-0 bg-primary opacity-0 z-10 rounded-2xl"></div>
               <img
                 src="/images/assorted-cookies.png"
                 alt="Assorted homemade cookies"
-                class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-105"
+                class="w-full h-64 object-cover"
                 loading="lazy"
               />
             </div>
-            <h4
-              class="font-display text-xl md:text-2xl text-black dark:text-white mb-1"
-            >
-              Cookies & Macarons
-            </h4>
-            <p
-              class="font-body text-sm text-text-light/60 dark:text-text-dark/60 mb-3"
-            >
-              Chocolate chip, shortbread, French macarons
-            </p>
-            <p class="text-primary font-medium text-sm">DM for pricing →</p>
+            <div class="menu-text">
+              <h4
+                class="font-display text-xl md:text-2xl text-black dark:text-white mb-1"
+              >
+                Cookies & Macarons
+              </h4>
+              <p
+                class="font-body text-sm text-text-light/60 dark:text-text-dark/60 mb-3"
+              >
+                Chocolate chip, shortbread, French macarons
+              </p>
+              <p class="text-primary font-medium text-sm inline-flex items-center gap-1">
+                DM for pricing
+                <span class="menu-arrow inline-block transition-transform">→</span>
+              </p>
+            </div>
           </div>
           <!-- Bread -->
-          <div class="group reveal-section cursor-pointer">
-            <div class="overflow-hidden rounded-2xl mb-4">
+          <div class="group menu-item cursor-pointer relative" data-menu-index="2">
+            <div class="menu-img-wrap overflow-hidden rounded-2xl mb-4 relative">
+              <div class="menu-img-overlay absolute inset-0 bg-primary opacity-0 z-10 rounded-2xl"></div>
               <img
                 src="/images/artisan-bread.png"
                 alt="Artisan sourdough bread"
-                class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-105"
+                class="w-full h-64 object-cover"
                 loading="lazy"
               />
             </div>
-            <h4
-              class="font-display text-xl md:text-2xl text-black dark:text-white mb-1"
-            >
-              Artisan Bread
-            </h4>
-            <p
-              class="font-body text-sm text-text-light/60 dark:text-text-dark/60 mb-3"
-            >
-              Sourdough, focaccia, garlic bread, baguettes
-            </p>
-            <p class="text-primary font-medium text-sm">DM for pricing →</p>
+            <div class="menu-text">
+              <h4
+                class="font-display text-xl md:text-2xl text-black dark:text-white mb-1"
+              >
+                Artisan Bread
+              </h4>
+              <p
+                class="font-body text-sm text-text-light/60 dark:text-text-dark/60 mb-3"
+              >
+                Sourdough, focaccia, garlic bread, baguettes
+              </p>
+              <p class="text-primary font-medium text-sm inline-flex items-center gap-1">
+                DM for pricing
+                <span class="menu-arrow inline-block transition-transform">→</span>
+              </p>
+            </div>
           </div>
           <!-- Pastries -->
-          <div class="group reveal-section cursor-pointer">
-            <div class="overflow-hidden rounded-2xl mb-4">
+          <div class="group menu-item cursor-pointer relative" data-menu-index="3">
+            <div class="menu-img-wrap overflow-hidden rounded-2xl mb-4 relative">
+              <div class="menu-img-overlay absolute inset-0 bg-primary opacity-0 z-10 rounded-2xl"></div>
               <img
                 src="/images/pastries.png"
                 alt="Assorted pastries"
-                class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-105"
+                class="w-full h-64 object-cover"
                 loading="lazy"
               />
             </div>
-            <h4
-              class="font-display text-xl md:text-2xl text-black dark:text-white mb-1"
-            >
-              Pastries
-            </h4>
-            <p
-              class="font-body text-sm text-text-light/60 dark:text-text-dark/60 mb-3"
-            >
-              Croissants, danish, eclairs, cinnamon rolls
-            </p>
-            <p class="text-primary font-medium text-sm">DM for pricing →</p>
+            <div class="menu-text">
+              <h4
+                class="font-display text-xl md:text-2xl text-black dark:text-white mb-1"
+              >
+                Pastries
+              </h4>
+              <p
+                class="font-body text-sm text-text-light/60 dark:text-text-dark/60 mb-3"
+              >
+                Croissants, danish, eclairs, cinnamon rolls
+              </p>
+              <p class="text-primary font-medium text-sm inline-flex items-center gap-1">
+                DM for pricing
+                <span class="menu-arrow inline-block transition-transform">→</span>
+              </p>
+            </div>
           </div>
           <!-- Celebration Cakes -->
           <div
-            class="group reveal-section cursor-pointer sm:col-span-2 lg:col-span-2"
+            class="group menu-item cursor-pointer relative sm:col-span-2 lg:col-span-2"
+            data-menu-index="4"
           >
-            <div class="overflow-hidden rounded-2xl mb-4">
+            <div class="menu-img-wrap overflow-hidden rounded-2xl mb-4 relative">
+              <div class="menu-img-overlay absolute inset-0 bg-primary opacity-0 z-10 rounded-2xl"></div>
               <img
                 src="/images/celebration-cake.png"
                 alt="Custom celebration cake"
-                class="w-full h-64 md:h-80 object-cover transition-transform duration-500 group-hover:scale-105"
+                class="w-full h-64 md:h-80 object-cover"
                 loading="lazy"
               />
             </div>
-            <h4
-              class="font-display text-xl md:text-2xl text-black dark:text-white mb-1"
-            >
-              Custom Celebration Cakes
-            </h4>
-            <p
-              class="font-body text-sm text-text-light/60 dark:text-text-dark/60 mb-3"
-            >
-              Weddings, birthdays, anniversaries — designed just for you
-            </p>
-            <a
-              href="#custom"
-              class="text-primary font-medium text-sm hover:underline cursor-pointer"
-              >Order Custom Cake →</a
-            >
+            <div class="menu-text">
+              <h4
+                class="font-display text-xl md:text-2xl text-black dark:text-white mb-1"
+              >
+                Custom Celebration Cakes
+              </h4>
+              <p
+                class="font-body text-sm text-text-light/60 dark:text-text-dark/60 mb-3"
+              >
+                Weddings, birthdays, anniversaries — designed just for you
+              </p>
+              <a
+                href="#custom"
+                class="text-primary font-medium text-sm hover:underline cursor-pointer inline-flex items-center gap-1"
+              >
+                Order Custom Cake
+                <span class="menu-arrow inline-block transition-transform">→</span>
+              </a>
+            </div>
           </div>
+        </div>
+
+        <!-- Portfolio CTA -->
+        <div class="menu-cta-wrap flex flex-col items-center mt-20 gap-3">
+          <p
+            class="menu-cta-hint text-xs uppercase tracking-[0.3em] text-text-light/40 dark:text-text-dark/40 font-medium"
+          >
+            Explore our complete collection
+          </p>
+          <a
+            href="portfolio.html"
+            class="menu-cta group/cta relative inline-flex items-center gap-3 px-10 py-4 rounded-full border-2 border-primary text-primary font-display text-lg md:text-xl italic cursor-pointer overflow-hidden transition-colors duration-500 hover:text-white"
+          >
+            <span
+              class="menu-cta-bg absolute inset-0 bg-primary origin-left scale-x-0 transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover/cta:scale-x-100"
+            ></span>
+            <span class="relative z-10">View Our Previous Work</span>
+            <svg
+              class="menu-cta-arrow relative z-10 w-5 h-5 transition-transform duration-300 group-hover/cta:translate-x-1"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
+              />
+            </svg>
+          </a>
         </div>
       </div>
     </section>
 
-    <!-- ===== SECTION 4: SCATTER GALLERY ===== -->
-    <section id="gallery" class="scatter-gallery">
-      <h2 class="scatter-heading font-display"></h2>
+    <!-- ===== SECTION 4: SCATTER GALLERY (with intro) ===== -->
+    <section
+      id="gallery"
+      class="scatter-gallery bg-background-light dark:bg-background-dark"
+    >
+      <!-- Intro heading (fades out on scroll) -->
+      <h2
+        class="intro-heading font-display text-text-light dark:text-text-dark"
+      >
+        Where Every Bite Tells a Story
+      </h2>
+      <!-- Stacked cards container (cards spread into scatter positions) -->
+      <div class="stacked-cards-container">
+        <!-- Cards dynamically added by JS -->
+      </div>
+      <!-- Scatter gallery heading (fades in after intro) -->
+      <h2
+        class="scatter-heading font-display text-text-light dark:text-text-dark"
+      ></h2>
     </section>
 
-    <!-- ===== SECTION 5: TESTIMONIALS ===== -->
+    <!-- ===== SECTION 5: TESTIMONIALS (360° Infinite Scroll) ===== -->
     <section
-      class="w-full py-20 md:py-32 bg-background-light dark:bg-background-dark"
+      id="testimonials"
+      class="w-full py-20 md:py-32 bg-white dark:bg-zinc-900 overflow-hidden"
     >
-      <div class="max-w-6xl mx-auto px-6 md:px-8">
-        <div class="text-center mb-16 reveal-section">
+      <div class="max-w-7xl mx-auto px-6 md:px-8 mb-12">
+        <div class="text-center reveal-section">
           <p
             class="text-xs uppercase tracking-[0.3em] text-primary font-medium mb-4"
           >
             Happy Customers
           </p>
           <h3
-            class="font-display text-3xl md:text-5xl text-black dark:text-white"
+            class="font-display text-3xl md:text-5xl text-black dark:text-white mb-2"
           >
             What They Say
           </h3>
+          <p class="text-sm text-text-light/60 dark:text-text-dark/60 font-body">
+            Real reviews from our Instagram family
+          </p>
         </div>
-        <div class="grid md:grid-cols-3 gap-8">
-          <div
-            class="reveal-section bg-white dark:bg-zinc-800 rounded-2xl p-8 shadow-sm hover:shadow-md transition-shadow"
-          >
-            <div class="flex gap-1 text-primary mb-4">★★★★★</div>
-            <p
-              class="font-body text-text-light/70 dark:text-text-dark/70 leading-relaxed mb-6 italic"
-            >
-              "The chocolate cake was absolutely divine! You can taste the
-              quality in every bite. Divya puts so much love into her baking —
-              it's like getting a warm hug."
-            </p>
-            <div>
-              <p class="font-medium text-black dark:text-white">Priya Sharma</p>
-              <p class="text-xs text-text-light/50 dark:text-text-dark/50">
-                Ordered: Chocolate Truffle Cake
+      </div>
+
+      <!-- 360° Infinite Scroll Container -->
+      <div class="testimonials-360-container relative">
+        <!-- Gradient overlays -->
+        <div class="testimonials-gradient-left absolute left-0 top-0 h-full w-32 md:w-40 z-10 pointer-events-none"></div>
+        <div class="testimonials-gradient-right absolute right-0 top-0 h-full w-32 md:w-40 z-10 pointer-events-none"></div>
+
+        <div class="testimonials-infinite-wrapper" id="testimonials-infinite-wrapper">
+          <div class="testimonials-infinite-track" id="testimonials-infinite-track">
+            <!-- Comment 1 -->
+            <div class="testimonial-comment">
+              <div class="flex items-start gap-3 mb-3">
+                <div class="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-primary-dark flex-shrink-0 flex items-center justify-center text-white font-medium text-sm">
+                  PS
+                </div>
+                <div class="flex-1 min-w-0">
+                  <div class="flex items-center gap-1.5 mb-1">
+                    <p class="font-medium text-sm text-black dark:text-white truncate">priya.sharma</p>
+                    <svg class="w-3.5 h-3.5 text-blue-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" />
+                    </svg>
+                  </div>
+                  <p class="text-xs text-text-light/40 dark:text-text-dark/40">2 weeks ago</p>
+                </div>
+              </div>
+              <p class="text-sm text-text-light/80 dark:text-text-dark/80 leading-relaxed font-body mb-3">
+                The chocolate cake was absolutely divine! 🍫✨ You can taste the quality in every bite. Divya puts so much love into her baking.
               </p>
+              <div class="flex items-center gap-4 text-xs text-text-light/40 dark:text-text-dark/40">
+                <span class="flex items-center gap-1">
+                  <span class="text-red-500">♥</span> 142
+                </span>
+              </div>
             </div>
-          </div>
-          <div
-            class="reveal-section bg-white dark:bg-zinc-800 rounded-2xl p-8 shadow-sm hover:shadow-md transition-shadow"
-          >
-            <div class="flex gap-1 text-primary mb-4">★★★★★</div>
-            <p
-              class="font-body text-text-light/70 dark:text-text-dark/70 leading-relaxed mb-6 italic"
-            >
-              "We ordered a custom 3-tier cake for our anniversary and it was
-              perfect! Beautiful design, incredible taste. Everyone at the party
-              was asking for the bakery name."
-            </p>
-            <div>
-              <p class="font-medium text-black dark:text-white">
-                Rahul & Meena
+
+            <!-- Comment 2 -->
+            <div class="testimonial-comment">
+              <div class="flex items-start gap-3 mb-3">
+                <div class="w-10 h-10 rounded-full bg-gradient-to-br from-amber-400 to-orange-500 flex-shrink-0 flex items-center justify-center text-white font-medium text-sm">
+                  RM
+                </div>
+                <div class="flex-1 min-w-0">
+                  <div class="flex items-center gap-1.5 mb-1">
+                    <p class="font-medium text-sm text-black dark:text-white truncate">rahul.meena</p>
+                    <svg class="w-3.5 h-3.5 text-blue-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" />
+                    </svg>
+                  </div>
+                  <p class="text-xs text-text-light/40 dark:text-text-dark/40">1 month ago</p>
+                </div>
+              </div>
+              <p class="text-sm text-text-light/80 dark:text-text-dark/80 leading-relaxed font-body mb-3">
+                We ordered a custom 3-tier cake for our anniversary and it was perfect! 🎂💕 Beautiful design, incredible taste!
               </p>
-              <p class="text-xs text-text-light/50 dark:text-text-dark/50">
-                Ordered: Custom Anniversary Cake
-              </p>
+              <div class="flex items-center gap-4 text-xs text-text-light/40 dark:text-text-dark/40">
+                <span class="flex items-center gap-1">
+                  <span class="text-red-500">♥</span> 203
+                </span>
+              </div>
             </div>
-          </div>
-          <div
-            class="reveal-section bg-white dark:bg-zinc-800 rounded-2xl p-8 shadow-sm hover:shadow-md transition-shadow"
-          >
-            <div class="flex gap-1 text-primary mb-4">★★★★★</div>
-            <p
-              class="font-body text-text-light/70 dark:text-text-dark/70 leading-relaxed mb-6 italic"
-            >
-              "The sourdough bread is unreal. Crispy on the outside, soft
-              inside, and that aroma! I'm now a regular — ordering every weekend
-              without fail."
-            </p>
-            <div>
-              <p class="font-medium text-black dark:text-white">Ankit Verma</p>
-              <p class="text-xs text-text-light/50 dark:text-text-dark/50">
-                Ordered: Artisan Sourdough Bread
+
+            <!-- Comment 3 -->
+            <div class="testimonial-comment">
+              <div class="flex items-start gap-3 mb-3">
+                <div class="w-10 h-10 rounded-full bg-gradient-to-br from-green-400 to-emerald-600 flex-shrink-0 flex items-center justify-center text-white font-medium text-sm">
+                  AV
+                </div>
+                <div class="flex-1 min-w-0">
+                  <div class="flex items-center gap-1.5 mb-1">
+                    <p class="font-medium text-sm text-black dark:text-white truncate">ankit_verma</p>
+                    <svg class="w-3.5 h-3.5 text-blue-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" />
+                    </svg>
+                  </div>
+                  <p class="text-xs text-text-light/40 dark:text-text-dark/40">3 days ago</p>
+                </div>
+              </div>
+              <p class="text-sm text-text-light/80 dark:text-text-dark/80 leading-relaxed font-body mb-3">
+                The sourdough bread is unreal! 🍞😍 Crispy on the outside, soft inside. I'm now a regular — ordering every weekend!
               </p>
+              <div class="flex items-center gap-4 text-xs text-text-light/40 dark:text-text-dark/40">
+                <span class="flex items-center gap-1">
+                  <span class="text-red-500">♥</span> 89
+                </span>
+              </div>
+            </div>
+
+            <!-- Comment 4 -->
+            <div class="testimonial-comment">
+              <div class="flex items-start gap-3 mb-3">
+                <div class="w-10 h-10 rounded-full bg-gradient-to-br from-pink-400 to-rose-500 flex-shrink-0 flex items-center justify-center text-white font-medium text-sm">
+                  NK
+                </div>
+                <div class="flex-1 min-w-0">
+                  <div class="flex items-center gap-1.5 mb-1">
+                    <p class="font-medium text-sm text-black dark:text-white truncate">neha.kapoor</p>
+                    <svg class="w-3.5 h-3.5 text-blue-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" />
+                    </svg>
+                  </div>
+                  <p class="text-xs text-text-light/40 dark:text-text-dark/40">5 days ago</p>
+                </div>
+              </div>
+              <p class="text-sm text-text-light/80 dark:text-text-dark/80 leading-relaxed font-body mb-3">
+                Best macarons in town! 🌈 The flavors are so unique and the texture is perfect. Ordered for my daughter's birthday! 🎉
+              </p>
+              <div class="flex items-center gap-4 text-xs text-text-light/40 dark:text-text-dark/40">
+                <span class="flex items-center gap-1">
+                  <span class="text-red-500">♥</span> 167
+                </span>
+              </div>
+            </div>
+
+            <!-- Comment 5 -->
+            <div class="testimonial-comment">
+              <div class="flex items-start gap-3 mb-3">
+                <div class="w-10 h-10 rounded-full bg-gradient-to-br from-purple-400 to-indigo-600 flex-shrink-0 flex items-center justify-center text-white font-medium text-sm">
+                  SM
+                </div>
+                <div class="flex-1 min-w-0">
+                  <div class="flex items-center gap-1.5 mb-1">
+                    <p class="font-medium text-sm text-black dark:text-white truncate">sanjay_malhotra</p>
+                    <svg class="w-3.5 h-3.5 text-blue-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" />
+                    </svg>
+                  </div>
+                  <p class="text-xs text-text-light/40 dark:text-text-dark/40">1 week ago</p>
+                </div>
+              </div>
+              <p class="text-sm text-text-light/80 dark:text-text-dark/80 leading-relaxed font-body mb-3">
+                Ordered croissants for a brunch party. They were flaky, buttery perfection! 🥐✨ Guests thought I bought from a French bakery!
+              </p>
+              <div class="flex items-center gap-4 text-xs text-text-light/40 dark:text-text-dark/40">
+                <span class="flex items-center gap-1">
+                  <span class="text-red-500">♥</span> 124
+                </span>
+              </div>
+            </div>
+
+            <!-- Comment 6 -->
+            <div class="testimonial-comment">
+              <div class="flex items-start gap-3 mb-3">
+                <div class="w-10 h-10 rounded-full bg-gradient-to-br from-cyan-400 to-blue-600 flex-shrink-0 flex items-center justify-center text-white font-medium text-sm">
+                  TA
+                </div>
+                <div class="flex-1 min-w-0">
+                  <div class="flex items-center gap-1.5 mb-1">
+                    <p class="font-medium text-sm text-black dark:text-white truncate">tara.ahuja</p>
+                    <svg class="w-3.5 h-3.5 text-blue-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" />
+                    </svg>
+                  </div>
+                  <p class="text-xs text-text-light/40 dark:text-text-dark/40">2 days ago</p>
+                </div>
+              </div>
+              <p class="text-sm text-text-light/80 dark:text-text-dark/80 leading-relaxed font-body mb-3">
+                Red velvet cake for my wedding was absolutely stunning! 💒❤️ Not only gorgeous, but tasted even better. Thank you! 🙏
+              </p>
+              <div class="flex items-center gap-4 text-xs text-text-light/40 dark:text-text-dark/40">
+                <span class="flex items-center gap-1">
+                  <span class="text-red-500">♥</span> 256
+                </span>
+              </div>
+            </div>
+
+            <!-- Comment 7 -->
+            <div class="testimonial-comment">
+              <div class="flex items-start gap-3 mb-3">
+                <div class="w-10 h-10 rounded-full bg-gradient-to-br from-yellow-400 to-amber-500 flex-shrink-0 flex items-center justify-center text-white font-medium text-sm">
+                  VK
+                </div>
+                <div class="flex-1 min-w-0">
+                  <div class="flex items-center gap-1.5 mb-1">
+                    <p class="font-medium text-sm text-black dark:text-white truncate">vikram.kohli</p>
+                    <svg class="w-3.5 h-3.5 text-blue-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" />
+                    </svg>
+                  </div>
+                  <p class="text-xs text-text-light/40 dark:text-text-dark/40">4 days ago</p>
+                </div>
+              </div>
+              <p class="text-sm text-text-light/80 dark:text-text-dark/80 leading-relaxed font-body mb-3">
+                Butterscotch cake was a huge hit at my son's birthday! 🎈 Moist, flavorful, and just the right amount of sweetness. Highly recommend!
+              </p>
+              <div class="flex items-center gap-4 text-xs text-text-light/40 dark:text-text-dark/40">
+                <span class="flex items-center gap-1">
+                  <span class="text-red-500">♥</span> 178
+                </span>
+              </div>
+            </div>
+
+            <!-- Comment 8 -->
+            <div class="testimonial-comment">
+              <div class="flex items-start gap-3 mb-3">
+                <div class="w-10 h-10 rounded-full bg-gradient-to-br from-teal-400 to-cyan-600 flex-shrink-0 flex items-center justify-center text-white font-medium text-sm">
+                  MS
+                </div>
+                <div class="flex-1 min-w-0">
+                  <div class="flex items-center gap-1.5 mb-1">
+                    <p class="font-medium text-sm text-black dark:text-white truncate">maya.singh</p>
+                    <svg class="w-3.5 h-3.5 text-blue-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" />
+                    </svg>
+                  </div>
+                  <p class="text-xs text-text-light/40 dark:text-text-dark/40">6 days ago</p>
+                </div>
+              </div>
+              <p class="text-sm text-text-light/80 dark:text-text-dark/80 leading-relaxed font-body mb-3">
+                The custom birthday cake design exceeded all expectations! 🎨✨ Divya is a true artist. Will definitely order again!
+              </p>
+              <div class="flex items-center gap-4 text-xs text-text-light/40 dark:text-text-dark/40">
+                <span class="flex items-center gap-1">
+                  <span class="text-red-500">♥</span> 195
+                </span>
+              </div>
             </div>
           </div>
         </div>
@@ -1151,5 +1401,16 @@
         });
       });
     </script>
+
+    <!-- Brand Attribution -->
+    <div
+      class="fixed bottom-4 right-4 md:bottom-6 md:right-6 z-50 pointer-events-none"
+    >
+      <span
+        class="text-sm md:text-base font-light italic text-black/70 dark:text-white/70 tracking-wide"
+      >
+        by divya
+      </span>
+    </div>
   </body>
 </html>

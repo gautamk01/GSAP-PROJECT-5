@@ -1,0 +1,480 @@
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap");
+
+:root {
+  --card-1-stroke: #d97762;
+  --card-2-stroke: #c4856e;
+  --card-3-stroke: #b89272;
+  --card-4-stroke: #a6856b;
+  --card-5-stroke: #d4856d;
+  --card-6-stroke: #c49074;
+  --card-7-stroke: #c78b5e;
+  --card-8-stroke: #b8937a;
+  --card-base-stroke: #e8ddd4;
+  --card-copy: #1a0f0a;
+  --bg: #faf6f1;
+  --primary: #d97762;
+  --text-muted: #8a7a6e;
+  --radius: 1.25rem;
+  --gap: 0.75rem;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Space Grotesk", sans-serif;
+  background: var(--bg);
+  color: var(--card-copy);
+  overflow-x: hidden;
+}
+
+/* ─── Navigation ─── */
+nav {
+  width: 100%;
+  padding: 1.25rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(250, 246, 241, 0.8);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+.nav-logo {
+  font-family: "Playfair Display", serif;
+  font-size: clamp(1.1rem, 2vw, 1.5rem);
+  font-weight: 700;
+  text-decoration: none;
+  color: var(--card-copy);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.nav-links {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
+.nav-links a {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-weight: 500;
+  text-decoration: none;
+  color: var(--text-muted);
+  transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+  color: var(--primary);
+}
+
+/* ─── Header ─── */
+header {
+  width: 100%;
+  padding: 6rem 2rem 4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 1rem;
+}
+
+.header-tag {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.35em;
+  font-weight: 600;
+  color: var(--primary);
+  background: rgba(217, 119, 98, 0.08);
+  padding: 0.5rem 1.5rem;
+  border-radius: 100px;
+}
+
+h1 {
+  font-family: "Playfair Display", serif;
+  font-size: clamp(2.5rem, 6vw, 5.5rem);
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  color: var(--card-copy);
+}
+
+header p {
+  font-size: clamp(0.85rem, 1.2vw, 1rem);
+  font-style: italic;
+  color: var(--text-muted);
+  max-width: 400px;
+  font-family: "Playfair Display", serif;
+  line-height: 1.6;
+}
+
+/* ─── Hover Hint ─── */
+.hover-hint {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 0.75rem 0 2rem;
+  color: var(--text-muted);
+  font-size: 0.72rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.hover-hint svg {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+  animation: hintBounce 2s ease-in-out infinite;
+}
+
+@keyframes hintBounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(4px);
+  }
+}
+
+/* ─── Bento Grid ─── */
+.bento-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: var(--gap);
+  padding: 0 var(--gap);
+  max-width: 1600px;
+  margin: 0 auto 2rem;
+}
+
+/* Card base */
+.card-container {
+  position: relative;
+  border-radius: var(--radius);
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.card-container .card-img {
+  width: 100%;
+  height: 100%;
+}
+
+img,
+svg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+h3 {
+  font-family: "Playfair Display", serif;
+  font-size: clamp(1rem, 1.8vw, 1.75rem);
+  font-weight: 400;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+}
+
+/* ─── Card Size Variants (Bento Layout) ─── */
+
+/* Large: spans 7 cols, 2 rows tall */
+.card-large {
+  grid-column: span 7;
+  grid-row: span 2;
+  min-height: 550px;
+}
+
+/* Tall: spans 5 cols, 2 rows */
+.card-tall {
+  grid-column: span 5;
+  grid-row: span 2;
+  min-height: 550px;
+}
+
+/* Small: spans 5 cols, 1 row */
+.card-small {
+  grid-column: span 5;
+  min-height: 320px;
+}
+
+/* Wide panoramic: spans 7 cols, 1 row */
+.card-wide {
+  grid-column: span 7;
+  min-height: 380px;
+}
+
+/* Square: spans 5 cols, 1 row */
+.card-square {
+  grid-column: span 5;
+  min-height: 380px;
+}
+
+/* Small-2: spans 4 cols */
+.card-small-2 {
+  grid-column: span 4;
+  min-height: 400px;
+}
+
+/* Large-2: spans 8 cols */
+.card-large-2 {
+  grid-column: span 8;
+  min-height: 400px;
+}
+
+/* Full-width panoramic */
+.card-panoramic {
+  grid-column: span 12;
+  min-height: 350px;
+}
+
+/* ─── SVG Strokes ─── */
+.card-container .svg-stroke {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1.5);
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+#card-1 .svg-stroke-1 svg path {
+  stroke: var(--card-1-stroke);
+}
+#card-2 .svg-stroke-1 svg path {
+  stroke: var(--card-2-stroke);
+}
+#card-3 .svg-stroke-1 svg path {
+  stroke: var(--card-3-stroke);
+}
+#card-4 .svg-stroke-1 svg path {
+  stroke: var(--card-4-stroke);
+}
+#card-5 .svg-stroke-1 svg path {
+  stroke: var(--card-5-stroke);
+}
+#card-6 .svg-stroke-1 svg path {
+  stroke: var(--card-6-stroke);
+}
+#card-7 .svg-stroke-1 svg path {
+  stroke: var(--card-7-stroke);
+}
+#card-8 .svg-stroke-1 svg path {
+  stroke: var(--card-8-stroke);
+}
+
+.card-container .svg-stroke-2 svg path {
+  stroke: var(--card-base-stroke);
+}
+
+/* ─── Card Info Overlay ─── */
+.card-info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 2rem 1.5rem 1.5rem;
+  background: linear-gradient(
+    to top,
+    rgba(250, 246, 241, 0.95) 0%,
+    rgba(250, 246, 241, 0.85) 60%,
+    rgba(250, 246, 241, 0) 100%
+  );
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  pointer-events: none;
+}
+
+.card-info h3 {
+  color: var(--card-copy);
+}
+
+.card-info .word {
+  will-change: transform;
+}
+
+.card-tag {
+  font-size: 0.55rem;
+  text-transform: uppercase;
+  letter-spacing: 0.25em;
+  font-weight: 600;
+  color: var(--primary);
+  opacity: 0;
+}
+
+.card-desc {
+  font-size: 0.8rem;
+  line-height: 1.5;
+  color: var(--text-muted);
+  max-width: 380px;
+  opacity: 0;
+}
+
+.card-price {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: var(--card-copy);
+  margin-top: 0.25rem;
+  opacity: 0;
+}
+
+/* ─── Footer ─── */
+footer {
+  width: 100%;
+  padding: 6rem 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+footer h1 {
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
+}
+
+.footer-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.footer-tagline {
+  font-family: "Playfair Display", serif;
+  font-style: italic;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.back-link {
+  display: inline-block;
+  margin-top: 2rem;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-weight: 500;
+  text-decoration: none;
+  color: var(--primary);
+  border: 1px solid var(--primary);
+  padding: 0.75rem 2.5rem;
+  border-radius: 100px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.back-link:hover {
+  background: var(--primary);
+  color: #fff;
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 1000px) {
+  .bento-grid {
+    grid-template-columns: repeat(6, 1fr);
+  }
+
+  .card-large,
+  .card-tall,
+  .card-wide,
+  .card-panoramic,
+  .card-large-2 {
+    grid-column: span 6;
+  }
+
+  .card-small,
+  .card-square,
+  .card-small-2 {
+    grid-column: span 6;
+  }
+
+  .card-large,
+  .card-tall {
+    min-height: 400px;
+    grid-row: span 1;
+  }
+
+  .card-wide,
+  .card-square,
+  .card-small,
+  .card-small-2,
+  .card-large-2,
+  .card-panoramic {
+    min-height: 320px;
+  }
+
+  header {
+    padding: 4rem 1.5rem 3rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .bento-grid {
+    grid-template-columns: 1fr;
+    padding: 0 0.5rem;
+    gap: 0.5rem;
+  }
+
+  .card-large,
+  .card-tall,
+  .card-small,
+  .card-wide,
+  .card-square,
+  .card-small-2,
+  .card-large-2,
+  .card-panoramic {
+    grid-column: span 1;
+    min-height: 280px;
+    grid-row: span 1;
+  }
+
+  .card-info {
+    padding: 1.5rem 1rem 1rem;
+  }
+
+  nav {
+    padding: 1rem;
+  }
+
+  .nav-links {
+    gap: 1rem;
+  }
+
+  .nav-links a {
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+  }
+
+  header {
+    padding: 3rem 1rem 2rem;
+  }
+
+  footer {
+    padding: 4rem 1rem;
+  }
+
+  :root {
+    --radius: 0.75rem;
+  }
+}
+
+/* ─── Reduced Motion ─── */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
